@@ -1,0 +1,28 @@
+<p id="notice" xmlns="http://www.w3.org/1999/html"><%= notice %></p>
+
+<div class="left">
+
+  <h1><%= @category.name %></h1>
+
+  <% @category.products.each do |product| %>
+      <div class="row-fluid">
+        <div class="span4">
+          <h3><%= product.title %></h3>
+
+          <p><%= product.description %>
+            <b><%= number_to_currency(product.price, :unit => "&pound;") %></b>
+            <%=link_to 'Show', product, :class => 'btn btn-mini'%></p>
+          <%= image_tag(product.image) %>
+          <%= button_to 'Add to Cart' , line_items_path(:product_id => product) %>
+
+        </div>
+
+  <% end %>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; Copyright E-Smart 2012</p>
+</footer>
+
+

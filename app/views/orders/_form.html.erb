@@ -1,0 +1,30 @@
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_area :address, :rows => 3, :cols => 40 %>
+  </div>
+    <div class="field">
+      <%= f.label :card_type %><br />
+      <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+    </div>
+    <div class="field">
+      <%= f.label :card_expires_on %><br />
+      <%= f.date_select :card_expires_on, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true %>
+      </p>               <!--Above date select takes start date and end date. Does not allow you to select previous years by doing Date.today.year + 10 and display the month  -->
+    </div>
+  <div class="actions">
+    <%= f.submit 'Confirm Order' %>
+  </div>
+<% end %>

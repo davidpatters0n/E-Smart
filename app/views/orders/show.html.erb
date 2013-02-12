@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Address:</b>
+  <%= @order.address %>
+</p>
+
+<p>
+  <b>Card type:</b>
+  <%= @order.card_type %>
+</p>
+
+<p>
+  <b>Card expires on:</b>
+  <%= @order.card_expires_on %>
+</p>
+
+<p>
+  <b>Ip address:</b>
+  <%= @order.ip_address %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

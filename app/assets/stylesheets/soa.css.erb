@@ -1,0 +1,90 @@
+/********* ICON MENU STYLES **************************************/
+
+.icon_menu {
+  text-align: center !important;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  border: 0px;
+}
+
+.icon_menu td {
+  margin: 0px;
+  padding: 0px;
+  background: transparent !important;
+}
+
+.icon_menu_item, .icon_menu_dummy, .icon_menu_delete {
+  margin: 10px;
+  padding: 10px;
+  width: 130px;
+  height: 130px;
+  border: 1px solid black;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  box-shadow: 6px 6px 12px #888888;
+  -moz-box-shadow: 6px 6px 12px #888888;
+  -webkit-box-shadow: 6px 6px 12px #888888;
+  text-align: center;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.icon_menu_item, .icon_menu_delete {
+  background: whitesmoke;
+  background: -moz-linear-gradient( 120deg, #CCCCCC 0%, #D5D5D5 10%, #FBFBFB 100% );
+  background: -webkit-gradient( linear, left top, right bottom, from(#FBFBFB), color-stop(0.9, #D5D5D5), to(#CCCCCC) );
+  position: relative;
+  cursor: pointer;
+}
+
+.icon_menu_delete {
+  font-size: 12px;
+}
+
+.icon_menu_dummy {
+  background: #E2E2E2;
+  background: -moz-linear-gradient( 120deg, #AAAAAA 0%, #B5B5B5 10%, #DBDBDB 100% );
+  background: -webkit-gradient( linear, left top, right bottom, from(#DBDBDB), color-stop(0.9, #B5B5B5), to(#AAAAAA) );
+  position: relative;
+}
+
+.icon_menu_item img {
+  padding-top: 15px;
+}
+
+.icon_menu_highlight {
+  background: whitesmoke !important;
+}
+
+.icon_menu_img {
+  position: absolute;
+  bottom: 5px;
+  left: 25px;
+  width: 100px;
+  height: 100px;
+}
+
+/* this is used as a list of options to drag onto the icon menu */
+.icon_menu_option {
+  background: whitesmoke;
+  border: 1px solid black;
+  padding: 2px;
+  margin: 2px;
+  line-height: 200%;
+  display: block;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.icon_menu_option_disabled {
+  background: #CCCCCC;
+  border: 1px solid black;
+  padding: 2px;
+  margin: 2px;
+  line-height: 200%;
+  display: block;
+  white-space: nowrap;
+}

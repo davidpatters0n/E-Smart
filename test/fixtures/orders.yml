@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  address: MyText
+  card_type: MyString
+  card_expires_on: 2013-02-06
+  ip_address: MyString
+
+two:
+  address: MyText
+  card_type: MyString
+  card_expires_on: 2013-02-06
+  ip_address: MyString
