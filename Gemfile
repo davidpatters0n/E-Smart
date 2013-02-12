@@ -15,6 +15,12 @@ gem 'devise'
 gem 'cancan'
 gem 'meta_request', '0.2.1'
 
+gem 'mysql2', :group => [:development, :test]
+group :production do
+  gem 'thin'
+  gem 'pg'
+  gem 'meta_request', '0.2.1'
+end
 
 
 # Gems used only for assets and not required
@@ -27,7 +33,9 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  
 end
+
 
 gem 'jquery-rails'
 
