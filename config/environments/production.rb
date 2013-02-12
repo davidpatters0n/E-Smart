@@ -64,7 +64,7 @@ ESmart::Application.configure do
   #Defined SMTP options
   #config.action_mailer.default_url_options = { :host => "77.100.90.77:3000"
   #SMTP
-  config.action_mailer.default_url_options = { :host => 'http://77.100.90.77:3000' }
+  config.action_mailer.default_url_options = { :host => 'e-smart.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       :address              => 'smtp.gmail.com',
