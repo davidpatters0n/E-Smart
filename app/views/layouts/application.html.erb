@@ -52,11 +52,15 @@
         </form>
         <ul class="nav">
           <% if signed_in? %>
+          <li><a href="<%= user_path(current_user) %>">My Account</a></li>
           <li><a href="<%=destroy_user_session_path %> ">Sign Out</a></li>
              <% else %>
               <li><a href="<%= user_session_path %> ">Sign In</a></li>
-              <% end %>
+        <% end %>
 
+          <% if can? :manage, @user %>
+          <li><a href="<%= dashboard_path %> ">Dashboard</a></li>
+          <% end  %>
         </ul>
         <ul class="nav">
           <li class="dropdown">
@@ -73,28 +77,6 @@
               <li><a href="#">Payments</a></li>
             </ul>
           </li>
-          <% if signed_in? %>
-              <% if current_user.role? :administrator %>
-
-          <li class="dropdown">
-            <a href="#"
-               class="dropdown-toggle"
-               data-toggle="dropdown">
-              Admin
-              <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= orders_path %>">View Orders</a></li>
-              <li><a href="<%= usermanagement_path %>">View Users</a></li>
-              <li><a href="<%= user_path(current_user) %>">My Account</a></li>
-            </ul>
-          </li>
-              <% else %>
-          <li><a href="<%= user_path(current_user) %>">My Account</a></li>
-              <% end %>
-              <% end %>
-
-
           <ul class="nav pull-right">
             <li class="dropdown">
               <a href="#"
@@ -144,6 +126,7 @@
             </ul>
           </div>
         </div><!--/span-->
+
         <div class="span9">
           <%= bootstrap_flash %>
           <%= yield %>

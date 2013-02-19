@@ -5,6 +5,8 @@ class CreateOrders < ActiveRecord::Migration
       t.string :card_type
       t.date :card_expires_on
       t.string :ip_address
+      t.string :status, default: "Processing"
+
 
       t.timestamps
     end

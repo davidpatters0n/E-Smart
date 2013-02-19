@@ -26,11 +26,12 @@
     <td><%= f.label :email, "Email Address" %></td>
     <td><%= @user.email %></td>
   </tr>
+  <% if can? :manage, :all %>
   <tr>
     <td class="th" colspan=2>Roles and Privileges</td>
   </tr>
   <tr>
-    <% if current_user.role? :administrator %>
+
         <% for role in Role.all %>
             <td><%= role.name %><%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role), :disabled => true %></td>
         <% end %>
@@ -44,6 +45,32 @@
 
     </td>
     </tr>
+  <table style="float: left; margin-left: 20px;">
+    <% if @user == current_user %>
+        <caption><b> My Orders</b> </caption>
+        <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+        </thead>
+        <% current_user.orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at.to_s(:short) %></td>
+              <td><%=  %></td>
+              <td> </td>
+              <td><%= number_to_currency(order.total_price, :unit => "£") %></td>
+            </tr>
+        <% end %>
+        <% if current_user.orders.empty? %>
+            <tr>
+              <td>No bookings found</td>
+            </tr>
+        <% end %>
+        </table>
+    <% end %>
 
     </table>
 <% end  %>

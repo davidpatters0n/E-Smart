@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
   has_many :role_users
+  has_many :orders
+
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable

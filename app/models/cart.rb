@@ -23,6 +23,7 @@ add a new product to line of items.
   def total_price
     line_items.to_a.sum { |item| item.total_price }
   end
+
 =begin
  Method total price take line_items, .sum method
  calculates a sum from the item.

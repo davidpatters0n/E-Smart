@@ -1,0 +1,35 @@
+<p>Dear, <%= @order.first_name %></p>
+
+<p>Your summary for the following order created on <%= @order.created_at.to_s(:short) %> is as followed</p>
+
+<table style="float: left;" xmlns="http://www.w3.org/1999/html">
+  <tr>
+    <td class="th" colspan=2>Order Details</td>
+  </tr>
+  <tr>
+    <td>First Name</td>
+    <td><%= @order.first_name %></td>
+  </tr>
+  <tr>
+    <td>Last Name</td>
+    <td><%= @order.last_name %></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%= @order.email %></td>
+  </tr>
+  <tr>
+    <td>Address</td>
+    <td><%= @order.address %></td>
+  </tr>
+  <tr>
+    <td>Card Type</td>
+    <td><%= @order.card_type %></td>
+  </tr>
+    <td><b>Total</b></td>
+    <td><%= number_to_currency(@order.total_price, :unit => "£") %></td>
+  </tr>
+ </table>
+
+Thank you for shopping at E-Smart
+

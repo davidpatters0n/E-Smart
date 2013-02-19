@@ -1,17 +1,12 @@
 class OrdersController < ApplicationController
-  # GET /orders
-  # GET /orders.json
-  def index
-    @orders = Order.paginate page: params[:page], order: 'created_at desc', per_page: 10
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @orders }
-    end
+  before_filter :admin, :only => [:index, :edit, :destroy, :update]
+
+  def index
+    @users = User.all #Get all users
+    @orders = Order.all # Get all orders
   end
 
-  # GET /orders/1
-  # GET /orders/1.json
   def show
     @order = Order.find(params[:id])
 
@@ -21,8 +16,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/new
-  # GET /orders/new.json
   def new
     @cart = current_cart
     if @cart.line_items.empty?
@@ -38,51 +31,46 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/1/edit
   def edit
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:id]) #Find order that is to be edited and then edit the STATUS of the order
   end
 
-  # POST /orders
-  # POST /orders.json
   def create
-    @order = Order.new(params[:order])
-    @order.add_line_items_from_cart(current_cart)
+   # @user = User.new(params[:user])
+    @order = Order.new(params[:order]) #Create new order based on the 'new' action and pass in order object.
+    @order.add_line_items_from_cart(current_cart) #Add the line_items from the cart to the @order.
 
     respond_to do |format|
-      if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
-        format.html { redirect_to(root_url, :notice =>
-            'Thank you for your order.') }
-        format.xml { render :xml => @order, :status => :created,
-                            :location => @order }
+      if @order.save #Begin to save order
+        OrderMailerProcess.order_process(@order).deliver
+        Cart.destroy(session[:cart_id]) #If the order is saved destroy the current session of the cart.
+        session[:cart_id] = nil #Cart_id now becomes nil
+        format.html { redirect_to(root_url, :notice => #Format into ht
+            'Thank you for your order you will recieve an email shortly.') }
       else
         format.html { render :action => "new" }
-        format.xml { render :xml => @order.errors,
-                            :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /orders/1
-  # PUT /orders/1.json
   def update
+    admin = User.find(current_user.role? :administrator)
     @order = Order.find(params[:id])
 
-    respond_to do |format|
-      if @order.update_attributes(params[:order])
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if @order.update_attributes(params[:order])
+      if @order.status == "Approved"
+        @order.save
       end
+      redirect_to orders_path
+      flash[:sucess]= 'Order was successfully update'
+      #email the user to tell them the state of their holiday
+      OrderConfirmation.order_confirmation(@order).deliver
+    else
+      render 'edit'
+
     end
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
   def destroy
     @order = Order.find(params[:id])
     @order.destroy

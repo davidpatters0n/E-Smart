@@ -1,4 +1,5 @@
 class LineItemsController < ApplicationController
+#  load_and_authorize_resource :class => self.class
 
   def index
     @line_items = LineItem.all

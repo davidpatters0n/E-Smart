@@ -1,8 +1,24 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
- #  before_filter :authenticate_user!
-#   load_and_authorize_resource
+  #  before_filter :authenticate_user!
+  #   load_and_authorize_resource
+  #Code below for current_cart references "Agile Web Development (page ....)"
+
+  # if you want to skip authentication, use:
+  # skip_before_filter :authenticate_user!
+  rescue_from CanCan::AccessDenied do |exception|
+
+=begin
+      Rescue_form prevent error from occuring and outputs and redirects you back to the root_path and display
+      generated alert message
+=end
+
+    redirect_to root_path, :alert => exception.message
+  end
+
   private
+  #Putting the below methods in private ensures that they are only accessible for all controllers.
+
   def current_cart
     Cart.find(session[:cart_id]) #Current cart find current cart_id
   rescue ActiveRecord::RecordNotFound # The resuce method prevents the 'RecordNotFound' error from occurring.
@@ -11,6 +27,17 @@ class ApplicationController < ActionController::Base
     cart
   end
 
+=begin
+          FILTERS
+=end
+
+  def admin
+    unless can? :manage, :all
+      #if logged user is not admin display error message and redirect to application INDEX (store_path)
+      flash[:error] = "Admin can only do this"
+      redirect_to root_path
+    end
+  end
 
   def authenticate
     access_denied unless signed_in?
@@ -21,26 +48,17 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
       flash[:error] = 'You do not have the privledges'
     else
-      redirect_to login_path
-      flash[:notice] = 'Please login first'
+      redirect_to root_url
+      flash[:error] = 'You do not have the privledges'
     end
   end
-
-  def admin_user
-    redirect_to root_url
-    flash[:error] = "You must be an admin to do that!" unless current_user.role? :administrator
-  end
-
 
   def correct_user
-    @user = current_user
     @user = User.find(params[:id])
-    if current_user.role? :administrator
+    if can? :manage, :all
       #Allow admin to access everyone account
     else
-      access_denied unless current_user?(@user)
+      access_denied unless can? :manage, :all
     end
   end
-
-
 end

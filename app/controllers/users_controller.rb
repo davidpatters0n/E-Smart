@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.xml
-  #before_filter :authenticate_user!
-#  before_filter :admin_user, :only => [:create, :new, :index, :update]
- # before_filter :authenticate, :only => [:edit, :update, :show, :new, :create, :destroy]
-# before_filter :correct_user, :only => [:edit, :show]
+
+  #Filters
   before_filter :admin_user, :only => [:create, :new, :index, :update]
-  before_filter :authenticate, :only => [:edit, :update, :show, :new, :create, :destroy]
+  before_filter :authenticate, :only => [:edit, :update, :new, :create, :destroy]
   before_filter :correct_user, :only => [:edit, :show]
 
 #  load_and_authorize_resource
@@ -30,7 +26,7 @@ class UsersController < ApplicationController
     @users = User.all
     @roles = Role.all
 
-    if current_user.role? :administrator
+    if can? :manage, :all
       @title = @user.first_name
     else
       @title = "My Account"
@@ -38,8 +34,6 @@ class UsersController < ApplicationController
   end
 
 
-  # GET /users/new
-  # GET /users/new.xml
   def new
     @user = User.new
     @current_method = "new"
@@ -50,15 +44,12 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
     @role = Role.all
     @roles = Role.all
   end
 
-  # POST /users
-  # POST /users.xml
   def create
     @user = User.new(params[:user])
 
@@ -73,8 +64,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
   def update
     @user = User.find(params[:id])
 
@@ -89,39 +78,13 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
   def destroy
     @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      format.html { redirect_to(usermanagement_path) }
       format.xml { head :ok }
     end
   end
-
-  private
-
-  def authenticate
-    deny_access unless signed_in?
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-    if current_user.role? :administrator
-      #Allow admin to access everyone account
-    else
-      access_denied unless current_user?(@user)
-    end
-  end
-
-  def current_user?(user)
-    user == current_user
-  end
-
-  def admin_user
-    redirect_to dashboard_path, :notice => "You must be an admin to do that!" unless current_user.role? :administrator
-  end
-
 end

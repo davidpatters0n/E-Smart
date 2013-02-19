@@ -1,11 +1,16 @@
 class Product < ActiveRecord::Base
-  include FilterScope
+  include FilterScope  #Include FilterScope module located in /lib directory
   default_scope :order => 'title'
 
-  attr_accessible :name, :description, :image_url, :price, :title, :image, :image_cache, :category_id
+  attr_accessible :name, :description, :image_url, :price, :title, :image, :image_cache, :category_id, :quantity
   mount_uploader :image, ImageUploader  #mounts the uploader to the given column in this case which it is :image
   belongs_to :category
+#  belongs_to :order
   has_many :line_items
+
+  accepts_nested_attributes_for :category
+  accepts_nested_attributes_for :line_items
+
 
 
   before_destroy :ensure_not_referenced_by_any_line_item  #Hook method that is called before destroying product

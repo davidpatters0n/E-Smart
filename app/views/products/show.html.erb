@@ -17,7 +17,7 @@
 </dl>
 
 
-<% if current_user.role? :administrator %>
+<% if can? :manage, @product %>
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               products_path, :class => 'btn'  %>

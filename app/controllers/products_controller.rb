@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
 
-  before_filter :admin_user, :only => [:create, :new, :index, :update]
-
+    before_filter :admin, :only => [:index, :new, :edit, :create, :destroy, :update]
 
 
   def index
- # @products = Product.all
+    #  @products = Product.all
+    @category = Category.all
     @products = Product.filter(params[:search], [:title])
+    # @products = Product.search(params[:search])
     respond_to do |format|
       format.html
       format.json { render json: @products }
@@ -24,7 +25,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = Product.new #Create a new empty class product
 
     respond_to do |format|
       format.html # new.html.erb
@@ -64,16 +65,14 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
-    @product.destroy
+    @product = Product.find(params[:id]) #Get product id that is to be deleted.
 
-    respond_to do |format|
-      format.html { redirect_to products_url }
-      format.json { head :no_content }
+    if @product.line_items.count == 0 #Check if product has line items that are == 0
+      @product.destroy #If product does not have any line items delete product
+      flash[:success] = 'Product successfully deleted'
+      redirect_to products_path
+    else
+      flash[:error] = 'Prodcut is attached to order and cannot be deleted'
     end
-  end
-
-  def admin_user
-    redirect_to root_url => "You must be an admin to do that!" unless current_user.role? :administrator
   end
 end

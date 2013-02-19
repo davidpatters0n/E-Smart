@@ -1,45 +1,72 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <% if @user.errors.any? %>
+        <div id="error_explanation" xmlns="http://www.w3.org/1999/html">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-    </div>
-    <% if @current_method == "new" %>
-        <div class="field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password %>
-        </div>
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation %>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
         </div>
     <% end %>
-    <% for role in Role.all%>
-        <div>
-          <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
-          <%= role.name %>
-        </div>
-    <% end %>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+
+    <table style="float: left;" xmlns="http://www.w3.org/1999/html">
+      <tr>
+        <td class="th" colspan=2>Login Details</td>
+      </tr>
+      <tr>
+        <% if @user.id %>
+            <td><%= f.label :id %></td>
+            <td><%= @user.id %></td>
+        <% end %>
+      </tr>
+      <tr>
+        <td><%= f.label :current_sign_in_at, "Sign in time" %></td>
+        <td><%= @user.current_sign_in_at.nil? ? "Not signed in" :
+                        @user.current_sign_in_at.strftime('%d-%b-%Y %H:%M:%S') %></td>
+      </tr>
+      <tr>
+        <td> <%= f.label :first_name %>
+          <br/></td>
+        <td><%= f.text_field :first_name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :last_name %>
+          <br/></td>
+        <td><%= f.text_field :last_name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :email %>
+          <br/></td>
+        <td><%= f.text_field :email %></td>
+      </tr>
+      <tr>
+        <% if @current_method == "new" %>
+            <td><%= f.label :password %>
+              <br/></td>
+            <td><%= f.password_field :password %></td>
+            </tr>
+            <tr>
+              <td><%= f.label :password_confirmation %>
+                <br/></td>
+              <td><%= f.password_field :password_confirmation %></td>
+            </tr>
+        <% end %>
+        <tr>
+          <td class="th" colspan=2>Roles and Privileges</td>
+        </tr>
+        <tr>
+          <% if current_user.role? :administrator %>
+              <% for role in Role.all %>
+                  <td><%= role.name %><%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %></td>
+              <% end %>
+
+              </tr>
+          <% end %>
+          <tr>
+            <td><%= f.submit %></td>
+          </tr>
+
+          </table>
 <% end %>

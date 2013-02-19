@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
   #load_and_authorize_resource
   def index
-    @products = Product.all  #Find all products
+  #  @products = Product.all  #Find all products
     @products = Product.filter(params[:search], [:title])  #Filter method which in the helpers passes the search and title objects
     @counter = session[:counter]                           #Create a new method counter take passes in the counter object
     @counter.nil? ? @counter = 1 : @counter+=1             #check if the counter is nil and then increments it to the counter and passes
-    session[:counter] = @counter                           # t back through.
+    session[:counter] = @counter                           # it back through.
 
     @cart = current_cart                                   #Get current cart
   end
