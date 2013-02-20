@@ -18,7 +18,7 @@
           <b><%= number_to_currency(product.price, :unit => "&pound;") %></b>
           <%=link_to 'Show', product, :class => 'btn btn-mini'%></p>
         <%= image_tag(product.image) %>
-        <% if stock_left(product) < 0  %>
+        <% if stock_left(product) == 0  %>
          <p style="color:red"><strong>SOLD OUT</strong></p>
         <% else %>
             <%= button_to 'Add to Cart' , line_items_path(:product_id => product) %>
