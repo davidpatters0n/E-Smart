@@ -27,13 +27,9 @@ class Product < ActiveRecord::Base
     product.price * quantity
   end
 
-  def stock_left
-    stock - line_items.sum(:quantity)
-  end
-
 =begin
-  def wtf_stock
-    product.stock - product.line_items.quantity
+  def stock_left(product)
+    product.stock - line_items.sum(:quantity)
   end
 =end
 
