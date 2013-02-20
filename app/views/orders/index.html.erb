@@ -21,8 +21,8 @@
         <td><%= order.user.try(:last_name) || order.last_name %></td>
         <td><%= order.user.try(:email) || order.email %></td>
         <td><%= order.address %></td>
-        <td><%= number_to_currency(order.total_price, :unit => "£") %></td>
         <td><%= order.quantity %></td>
+        <td><%= number_to_currency(order.total_price, :unit => "£") %></td>
         <td><%= order.created_at.to_s(:short) %></td>
         <td><%= order.status %></td>
         <td><%= link_to 'Show', order, :class => 'btn btn-mini' %></td>

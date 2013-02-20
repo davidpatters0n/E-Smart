@@ -10,7 +10,6 @@ class Order < ActiveRecord::Base
   belongs_to :cart #An order belongs to a cart.
   has_many :line_items, :dependent => :destroy   #If an oder is deleted so must the line items
   belongs_to :user  #One order belongs to a user
-# has_many :products
 
 
   #################################
@@ -18,7 +17,6 @@ class Order < ActiveRecord::Base
   #################################
   accepts_nested_attributes_for :user # accepts_nested_attributes allows me to save records via the Activerecord association
   accepts_nested_attributes_for :line_items
-# accepts_nested_attributes_for :products
 
   #List of card typed that will be used in drop down.
   CARD_TYPES = ["Visa", "visa", "MasterCard", "master", "Discover", "discover", "American Express", "american_express"]
@@ -45,7 +43,6 @@ class Order < ActiveRecord::Base
 
   def quantity
     line_items.to_a.sum { |quant| quant.quantity }
-
   end
 
   def total_price

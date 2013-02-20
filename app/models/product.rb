@@ -2,10 +2,9 @@ class Product < ActiveRecord::Base
   include FilterScope  #Include FilterScope module located in /lib directory
   default_scope :order => 'title'
 
-  attr_accessible :name, :description, :image_url, :price, :title, :image, :image_cache, :category_id, :quantity
+  attr_accessible :name, :description, :image_url, :price, :title, :image, :image_cache, :category_id, :quantity, :stock
   mount_uploader :image, ImageUploader  #mounts the uploader to the given column in this case which it is :image
   belongs_to :category
-#  belongs_to :order
   has_many :line_items
 
   accepts_nested_attributes_for :category
@@ -27,5 +26,16 @@ class Product < ActiveRecord::Base
   def total_price
     product.price * quantity
   end
+
+  def stock_left
+    stock - line_items.sum(:quantity)
+  end
+
+=begin
+  def wtf_stock
+    product.stock - product.line_items.quantity
+  end
+=end
+
   #Simple product price * quantity.
 end

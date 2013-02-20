@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
         @order.save
       end
       redirect_to orders_path
-      flash[:sucess]= 'Order was successfully update'
+      flash[:sucess]= 'Order was successfully updated and processed'
       #email the user to tell them the state of their holiday
       OrderConfirmation.order_confirmation(@order).deliver
     else

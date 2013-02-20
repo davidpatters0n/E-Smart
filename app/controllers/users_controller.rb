@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
   #Filters
-  before_filter :admin_user, :only => [:create, :new, :index, :update]
+  before_filter :admin, :only => [:create, :new, :index]
   before_filter :authenticate, :only => [:edit, :update, :new, :create, :destroy]
-  before_filter :correct_user, :only => [:edit, :show]
+#  before_filter :correct_user, :only => [:edit, :index, :update, :create,:new, :destroy]
 
-#  load_and_authorize_resource
+  #load_and_authorize_resource
 
   def index
     unless signed_in?
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @users = User.all
     @roles = Role.all
 
-    if can? :manage, :all
+    if current_user.role? :administrator
       @title = @user.first_name
     else
       @title = "My Account"

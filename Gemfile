@@ -13,6 +13,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'devise'
 gem 'cancan'
+gem 'gmaps4rails'
 gem 'meta_request', '0.2.1'
 
 gem 'mysql2', :group => [:development, :test]

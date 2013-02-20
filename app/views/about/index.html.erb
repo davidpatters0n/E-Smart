@@ -1,22 +1,67 @@
 <form class="form-horizontal">
-   <fieldset>
+  <fieldset>
     <div class="control-group">
-     <h1>About</h1>
-     <p>Esmart.com is one of the largest Internet resellers of brand name computer technology and consumer electronics products. Founded in 1999, Esmart.com is headquartered in Wimbledon,
-      London. Employing over 300 employees, we service 3 million registered customers.
-       Our business philosophy is simple: give consumers and businesses what they want, when they want it.
-       We never stop improving our world class operation by putting our customers - and their needs - first.</p>
-     <br />
-     <h3>Products</h3>
-     <p>
-       We offer our customers over 52,000 quality products, and our list of product categories and product offerings is growing every day.
-       Ebuyer customers know they're getting the best prices and exclusive offers on a huge range of computer technology products like desktops, notebooks,
-       printers, networking, digital cameras, software, storage and more. Plus, we offer other hot products such as LCD TVs, MP3 players, gaming and home electronics.
-       Our great relationships with all the major vendors mean our customers will always find special deals on great products from the biggest names
-       in the industry. And to help our customers choose the right products, we make it easy to find availability, pricing, reviews and ratings.
-     </p>
+      <h1>About</h1>
+      <p>Esmart.com is one of the largest Internet resellers of brand name computer technology and consumer electronics products. Founded in 1999, Esmart.com is headquartered in Wimbledon,
+        London. Employing over 300 employees, we service 3 million registered customers.
+        Our business philosophy is simple: give consumers and businesses what they want, when they want it.
+        We never stop improving our world class operation by putting our customers - and their needs - first.</p>
+      <br />
+      <h3>Products</h3>
+      <p>
+        We offer our customers over 52,000 quality products, and our list of product categories and product offerings is growing every day.
+        E-Smart customers know they're getting the best prices and exclusive offers on a huge range of computer technology products like desktops, notebooks,
+        printers, networking, digital cameras, software, storage and more. Our great relationships with all the major vendors mean our customers
+        will always find special deals on great products from the biggest names
+        in the industry. And to help our customers choose the right products, we make it easy to find availability, pricing, reviews and ratings.
+      </p>
     </div>
-   </fieldset>
+  </fieldset>
 
-  </form>
+
+  <script src="http://maps.google.se/maps/api/js?sensor=true"></script>
+
+  <script>
+
+      function initialize()
+      {
+          var myCenter=new google.maps.LatLng(51.42335,-0.20350);
+          directionsDisplay = new google.maps.DirectionsRenderer();
+
+          var settings = {
+              center:myCenter,
+              zoom:15,
+              mapTypeControl: true,
+              mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+              navigationControl: true,
+              navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+              mapTypeId:google.maps.MapTypeId.ROADMAP
+          };
+
+          var map=new google.maps.Map(document.getElementById("map_canvas"),settings);
+          //directionsDisplay.setMap(map);
+
+          var marker=new google.maps.Marker({
+              position:myCenter
+          });
+
+          marker.setMap(map);
+
+          var infowindow = new google.maps.InfoWindow({
+
+              content:"24 Alexanda Road"  +
+                      " Wimbledon " +
+                      " London " +
+                      " SW19 9PQ "
+          });
+          google.maps.event.addListener(marker, 'click', function() {
+              infowindow.open(map,marker);
+          });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+  <div id="map_canvas" style="width:500px;height:380px;"></div>
+
+</form>
 </form>

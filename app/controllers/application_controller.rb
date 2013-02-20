@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     if can? :manage, :all
       #Allow admin to access everyone account
     else
-      access_denied unless can? :manage, :all
+      @user == current_user
     end
   end
 end

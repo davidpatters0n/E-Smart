@@ -4,7 +4,7 @@
     <p>At E-Smart we are offering you a great range of products at an affordable price, whilst offering you the best
       online shopping experience. Offering a wide range computer peripherals and components.</p>
 
-    <p><a class="btn btn-primary btn-large" href="<%=about_path%>">Learn More&raquo;</a></p>
+    <p><a class="btn btn-primary btn-large" href="<%=about_url%>">Learn More&raquo;</a></p>
   </div>
 </div>
 <% @products.each do |product| %>
@@ -18,8 +18,12 @@
           <b><%= number_to_currency(product.price, :unit => "&pound;") %></b>
           <%=link_to 'Show', product, :class => 'btn btn-mini'%></p>
         <%= image_tag(product.image) %>
-        <%= button_to 'Add to Cart' , line_items_path(:product_id => product) %>
-        <!--:remote true sets the respond_to in the controller to respond to js -->
+        <% if stock_left(product) < 0  %>
+         <p style="color:red"><strong>SOLD OUT</strong></p>
+        <% else %>
+            <%= button_to 'Add to Cart' , line_items_path(:product_id => product) %>
+        <% end %>
+            <!--:remote true sets the respond_to in the controller to respond to js -->
 
       </div>
 

@@ -27,13 +27,28 @@
     <td><%= @order.ip_address %></td>
   </tr>
   <tr>
-    <td><b>Total</b></td>
-    <td><%= number_to_currency(@order.total_price, :unit => "£") %></td>
-  </tr>
-  <tr>
     <td><%= link_to 'Edit', edit_order_path(@order) %> |
-      <%= link_to 'Back', orders_path %>
-    </td>
+      <%= link_to 'Back', orders_path %></td>
   </tr>
+
+  <table style="float: left; margin-left: 20px;">
+      <caption><b>Products Details</b></caption>
+    <thead>
+     <tr>
+      <th>Order Date</th>
+      <th>Quantity</th>
+      <th>Product</th>
+      <th>Total</th>
+     </tr>
+    </thead>
+    <% @order.line_items.each do |item| %>
+    <tr>
+      <td><%= item.created_at.to_s(:short) %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.product.title %></td>
+      <td><%= number_to_currency(item.total_price, :unit => "£") %></td>
+    </tr>
     </table>
+    </table>
+         <% end  %>
 
