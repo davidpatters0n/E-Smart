@@ -1,15 +1,18 @@
 <table>
   <%= render(cart.line_items) %>
+  <!--render cart which is located in the show.html.erb-->
   <tr class="total_line">
     <td colspan="2">Total</td>
     <td class="total_cell"><%= number_to_currency(cart.total_price, :unit => "&pound;") %></td>
+    <!-- Add £ to the total price by using number_to_currency method-->
 
   </tr>
 
 </table>
 <table>
   <tr>
-    <td><%= button_to "Checkout" , new_order_path, :method => :get %></td>
-   <td><%= button_to 'Empty cart', cart, method: :delete,data: { confirm: 'Are you sure?' } %></td>
+    <td><%= button_to "Checkout" , new_order_path, :method => :get, :class => 'btn btn-success btn-mini' %></td>
+    <!--'get' method fetches the "new" order action when the button is clicked-->
+   <td><%= button_to 'Empty cart', cart, method: :delete,data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger btn-mini' %></td>
   </tr>
 </table>

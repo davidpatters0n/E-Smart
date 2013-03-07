@@ -39,8 +39,10 @@ ESmart::Application.configure do
   #config.action_mailer.default_url_options = { :host => "77.100.90.77:3000"
   #SMTP
   config.action_mailer.default_url_options = { :host => '77.100.90.77:3000' }
+  #Default URL used so that when a link is clicked on the mailer they are redirected to the local adddess
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
+  #SMTP settings
       :address              => 'smtp.gmail.com',
       :port                 => 587,
       :domain               => 'gmail.com',

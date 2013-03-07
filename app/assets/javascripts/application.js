@@ -12,5 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require twitter/bootstrap
-//= require_tree .
+//= require bootstrap-carousel
+// //= require_tree .
+
+!function ($) {
+    $(function(){
+        // carousel demo
+        $('#myCarousel').carousel() /*Initialize carousel using supplied function*/
+    })
+}(window.jQuery)
+
+

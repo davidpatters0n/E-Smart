@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
 
@@ -9,12 +9,14 @@ gem "twitter-bootstrap-rails"
 gem 'mysql2'
 gem 'carrierwave'
 gem 'thin'
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
 gem 'devise'
 gem 'cancan'
 gem 'gmaps4rails'
 gem 'meta_request', '0.2.1'
+gem 'contact_us', '~> 0.4.0'
+gem 'jquery-datatables-rails'
+#gem 'acts-as-taggable-on', '~> 2.3.1'
+#gem 'rails3-jquery-autocomplete'
 
 gem 'mysql2', :group => [:development, :test]
 group :production do

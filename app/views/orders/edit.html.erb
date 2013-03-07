@@ -1,10 +1,11 @@
+<!--Form is automatically generated when the 'rails scaffold' command is executed. -->
+
 <h1>Editing order</h1>
 
 <%= form_for(@order) do |f| %>
-    <% if @order.errors.any? %>
+    <% if @order.errors.any? %>    <!--Checks if any errors exisst. If so then display error message-->
         <div id="error_explanation">
           <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
           <ul>
             <% @order.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>

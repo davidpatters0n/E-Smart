@@ -18,13 +18,16 @@
   <% @orders.each do |order| %>
       <tr>
         <td><%= order.user.try(:first_name) || order.first_name  %></td>
-        <td><%= order.user.try(:last_name) || order.last_name %></td>
-        <td><%= order.user.try(:email) || order.email %></td>
-        <td><%= order.address %></td>
-        <td><%= order.quantity %></td>
+        <!--Get the order and use the try function. The main purpose of the .try() is to prevent any situation where
+         the object can be considerd to be nil which avoids throwing a NoMethodError on NilClasses-->
+        <td><%= order.user.try(:last_name) || order.last_name %></td>  <!--Get the last name-->
+        <td><%= order.user.try(:email) || order.email %></td>  <!--Get the email-->
+        <td><%= order.address %></td>   <!--Get address-->
+        <td><%= order.quantity %></td>   <!--Get quantity -->
         <td><%= number_to_currency(order.total_price, :unit => "£") %></td>
+        <!--Get convert currency total_price into currency and add "£" sysmbol  -->
         <td><%= order.created_at.to_s(:short) %></td>
-        <td><%= order.status %></td>
+        <td><%= order.status %></td>   <!--Display order status -->
         <td><%= link_to 'Show', order, :class => 'btn btn-mini' %></td>
         <td><%= link_to 'Edit', edit_order_path(order), :class => 'btn btn-mini' %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'btn btn-mini btn-danger' %></td>

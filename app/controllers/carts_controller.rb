@@ -7,6 +7,7 @@ class CartsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(root_url,
                                 :flash => {:error => 'Your cart is currently empty'}) }
+      #Redirect user to root_path and display error message notifying them that their cart is empty.
     end
   end
 end

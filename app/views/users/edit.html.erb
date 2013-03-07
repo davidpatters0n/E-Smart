@@ -1,3 +1,5 @@
+<!--Render partial _form.html.erb when this partial is rendered the controller will handle the edit and update action-->
+
 <%= form_for @user  do |f| %>
     <%= render :partial => 'form', :locals => { :f => f } %>
 <% end %> 

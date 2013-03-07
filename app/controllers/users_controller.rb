@@ -8,11 +8,11 @@ class UsersController < ApplicationController
   #load_and_authorize_resource
 
   def index
-    unless signed_in?
+    unless signed_in?  #Unless the user is signed in they are redirected to the login page
       redirect_to new_user_session_path
     end
 
-    @users = User.all
+    @users = User.all   #Get all users.
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,11 +22,11 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])  #To show user pass in user_id
     @users = User.all
     @roles = Role.all
 
-    if current_user.role? :administrator
+    if current_user.role? :administrator #If user is an admin they can view all users profile.
       @title = @user.first_name
     else
       @title = "My Account"
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
     @roles = Role.all
   end
 
-  def create
+  def create    #Automatic generated method created when running the rails scaffold command.
     @user = User.new(params[:user])
 
     respond_to do |format|
@@ -64,7 +64,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
+  def update  #Automatic generated method created when running the rails scaffold command.
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -78,7 +78,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy #Automatic generated method created when running the rails scaffold command.
     @user = User.find(params[:id])
     @user.destroy
 

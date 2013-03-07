@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  #Accessible attributes that uses mass-assignemnt so that attributes can be accessed from other models.
   attr_accessible :address, :card_expires_on, :card_type, :ip_address, :card_number, :email, :quantity,
                   :user_id, :status, :first_name, :last_name, :email, :cvv, :title
   #Purpose of attr_accessible is to for mass assignment. This is used when a model wants to access attributes outside it
@@ -19,14 +20,14 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :line_items
 
   #List of card typed that will be used in drop down.
-  CARD_TYPES = ["Visa", "visa", "MasterCard", "master", "Discover", "discover", "American Express", "american_express"]
+  CARD_TYPES = ["Visa", "visa", "Visa Electron", "visa_electron" "MasterCard", "master", "American Express", "american_express", "Solo", "solo", "Maestro", "maestro"]
   STATUS = [ "Processing", "Approved", "Rejected" ]
 
   #############
   # Validation#
   #############
 
-  validates_presence_of :card_expires_on, :card_type, :address
+  validates_presence_of :card_expires_on, :card_type, :address #Ensures that these attributes are not left blank.
   validates :card_type, :inclusion => CARD_TYPES
 
   ###############
@@ -44,8 +45,11 @@ class Order < ActiveRecord::Base
   def quantity
     line_items.to_a.sum { |quant| quant.quantity }
   end
+  #Above quantity method performs a lambda that sums the line_items by passing in the quantity method
 
   def total_price
     line_items.to_a.sum { |item| item.total_price }
   end
+  #Above total_price method performs a lambda that sums the line_items by passing in the total_price method
+
 end

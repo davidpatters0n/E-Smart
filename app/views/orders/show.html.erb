@@ -1,54 +1,100 @@
-<table style="float: left;" xmlns="http://www.w3.org/1999/html">
-  <tr>
-    <td class="th" colspan=2>Order Details</td>
-  </tr>
-  <tr>
-    <td><b>First Name</b></td>
-    <td><%= @order.first_name %></td>
-  </tr>
-  <tr>
-    <td><b>Last Name</b></td>
-    <td><%= @order.last_name %></td>
-  </tr>
-  <tr>
-    <td><b>Email</b></td>
-    <td><%= @order.email %></td>
-  </tr>
-  <tr>
-    <td><b>Address</b></td>
-    <td><%= @order.address %></td>
-  </tr>
-  <tr>
-    <td><b>Card Type</b></td>
-    <td><%= @order.card_type %></td>
-  </tr>
-  <tr>
-    <td><b>Ip Address</b></td>
-    <td><%= @order.ip_address %></td>
-  </tr>
-  <tr>
-    <td><%= link_to 'Edit', edit_order_path(@order) %> |
-      <%= link_to 'Back', orders_path %></td>
-  </tr>
+<div class="hero-unit"> <!--div class supplied by Boostrap-->
+  <div class="row">
+    <div class="span4">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Order Details</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><b>First Name</b></td>
+          <td><%= @order.first_name %></td>
+          <!--Get the first name  -->
+        </tr>
+        <tr class="info">
 
-  <table style="float: left; margin-left: 20px;">
-      <caption><b>Products Details</b></caption>
-    <thead>
-     <tr>
-      <th>Order Date</th>
-      <th>Quantity</th>
-      <th>Product</th>
-      <th>Total</th>
-     </tr>
-    </thead>
-    <% @order.line_items.each do |item| %>
-    <tr>
-      <td><%= item.created_at.to_s(:short) %></td>
-      <td><%= item.quantity %></td>
-      <td><%= item.product.title %></td>
-      <td><%= number_to_currency(item.total_price, :unit => "£") %></td>
-    </tr>
-    </table>
-    </table>
-         <% end  %>
+          <td><b>Last Name</b></td>
+          <td><%= @order.last_name %></td>
+          <!--Get the last name  -->
+        </tr>
+
+        <tr>
+          <td><b>Email</b></td>
+          <td><%= @order.email %></td>
+          <!--Get the email -->
+        </tr>
+
+        <tr class="info">
+
+          <td><b>Address</b></td>
+          <td><%= @order.address %></td>
+          <!--Get the address  -->
+        </tr>
+
+        <tr>
+          <td><b>Card Type</b></td>
+          <td><%= @order.card_type %></td>
+          <!--Get the card_type  -->
+        </tr>
+
+        <tr class="info">
+
+          <td><b>Ip Address</b></td>
+          <td><%= @order.ip_address %></td>
+          <!--Get the IP Address   -->
+        </tr>
+        <% if can? :manage, :all %>
+        <tr>
+          <td><%= link_to 'Edit', edit_order_path(@order) %>
+            |  <!--Link back to the edit page, and pass in the order -->
+            <%= link_to 'Back', orders_path %></td>
+        </tr>
+           <% else %>
+           <tr>
+             <td><%= link_to 'Back', user_path(current_user)  %></td>
+           </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div class="span6">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Order History</th>
+          <th></th>
+          <th></th>
+          <th></th>
+
+        </tr>
+        <tr>
+          <th>Order Date</th>
+          <th>Quantity</th>
+          <th>Product</th>
+          <th>Total</th>
+        </tr>
+        </thead>
+        <% @order.line_items.each do |item| %>  <!--Loops the orders line_items   -->
+            <tbody>
+            <tr>
+              <td><%= item.created_at.to_s(:short) %></td>
+              <!--Convert the date format to short i.e. # => "04 Dec 00:00"  -->
+              <td><%= item.quantity %></td>
+              <!--Get the line_item quantity this will display how much was ordered   -->
+              <td><%= item.product.title %></td>
+              <!--Get the product title -->
+              <td><%= number_to_currency(item.total_price, :unit => "£") %></td>
+            </tr>
+            </tbody>
+        <% end %>
+            </table>
+
+            </div>
+            </div>
+            </div>
 

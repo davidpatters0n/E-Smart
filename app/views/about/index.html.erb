@@ -1,7 +1,8 @@
 <form class="form-horizontal">
-  <fieldset>
-    <div class="control-group">
+
+
       <h1>About</h1>
+  <div class="well">
       <p>Esmart.com is one of the largest Internet resellers of brand name computer technology and consumer electronics products. Founded in 1999, Esmart.com is headquartered in Wimbledon,
         London. Employing over 300 employees, we service 3 million registered customers.
         Our business philosophy is simple: give consumers and businesses what they want, when they want it.
@@ -15,9 +16,14 @@
         will always find special deals on great products from the biggest names
         in the industry. And to help our customers choose the right products, we make it easy to find availability, pricing, reviews and ratings.
       </p>
-    </div>
-  </fieldset>
 
+
+
+
+  <!--Following script code sets up google api.
+  By reading googles api the following could be set up
+  https://developers.google.com/maps/documentation/javascript/tutorial
+  -->
 
   <script src="http://maps.google.se/maps/api/js?sensor=true"></script>
 
@@ -25,43 +31,43 @@
 
       function initialize()
       {
-          var myCenter=new google.maps.LatLng(51.42335,-0.20350);
-          directionsDisplay = new google.maps.DirectionsRenderer();
+          var myCenter=new google.maps.LatLng(51.42335,-0.20350);  /*Set lat and long coordinates*/
+          directionsDisplay = new google.maps.DirectionsRenderer();  /*Render google map*/
 
-          var settings = {
+          var settings = {   /*Settings for google map*/
               center:myCenter,
               zoom:15,
               mapTypeControl: true,
               mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
               navigationControl: true,
               navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
-              mapTypeId:google.maps.MapTypeId.ROADMAP
+              mapTypeId:google.maps.MapTypeId.ROADMAP /*Type of Map */
           };
 
           var map=new google.maps.Map(document.getElementById("map_canvas"),settings);
           //directionsDisplay.setMap(map);
 
           var marker=new google.maps.Marker({
-              position:myCenter
+              position:myCenter      /*Set marker in the center of the map*/
           });
 
-          marker.setMap(map);
+          marker.setMap(map); /*Set marker on the map*/
 
-          var infowindow = new google.maps.InfoWindow({
+          var infowindow = new google.maps.InfoWindow({   /*Information pane to contain */
 
               content:"24 Alexanda Road"  +
                       " Wimbledon " +
                       " London " +
                       " SW19 9PQ "
           });
-          google.maps.event.addListener(marker, 'click', function() {
+          google.maps.event.addListener(marker, 'click', function() {    /*Event listener responds to click and opens marker when clicked.*/
               infowindow.open(map,marker);
           });
       }
 
-      google.maps.event.addDomListener(window, 'load', initialize);
+      google.maps.event.addDomListener(window, 'load', initialize); /*When page window is loaded initialise the google map*/
   </script>
   <div id="map_canvas" style="width:500px;height:380px;"></div>
 
-</form>
+   </div>
 </form>

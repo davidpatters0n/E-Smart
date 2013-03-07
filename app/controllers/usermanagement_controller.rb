@@ -1,14 +1,13 @@
 class UsermanagementController < ApplicationController
   #before_filter :authenticate_user!
   
- #load_and_authorize_resource :user, :parent => false
   load_and_authorize_resource :class => self.class
- #load_and_authorize_resource
+ #Loads the reosurce into an instance variable and authorises it automatically for that particular controller.
   def index
 
     @title = "User Management"
     @users = User.all
-#    @roles = Role.all
-    authorize! :manage, (@users.first || User)        
+    authorize! :manage, (@users.first || User)
+    #Checks if the user can manage the user. If not then they cannot access this page.
   end
 end

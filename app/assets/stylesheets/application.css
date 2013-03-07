@@ -9,27 +9,118 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require dataTables/jquery.dataTables.bootstrap
  *= require_tree .
  */
 
-
 /*table {margin-bottom:1.4em;width:100%;} */
-th, .th {font-weight:bold;}
-thead th, .th {background-color:#d5e3ee !important;}
-th, td, caption {padding:4px 10px 4px 5px;}
-tbody tr:nth-child(even) td, tbody tr.even td {background:#f3f4f5;}
-tfoot {font-style:italic;}
-caption {background:#eee;}
-.small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
-.large {font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;}
-.hide {display:none;}
-.quiet {color:#666;}
-.loud {color:#000;}
-.highlight {background:#ff0;}
-.added {background:#060;color:#fff;}
-.removed {background:#900;color:#fff;}
-.first {margin-left:0;padding-left:0;}
-.last {margin-right:0;padding-right:0;}
-.top {margin-top:0;padding-top:0;}
-.bottom {margin-bottom:0;padding-bottom:0;}
-.bottom {margin-bottom:0;padding-bottom:0;}
+
+.productpageprice {
+    width: 250px;
+    height: 58px;
+    background: url(/pricetagproduct.png) no-repeat right 0;
+    position: relative;
+    padding: 9px 0 9px 20px;
+    margin: 45px 0 10px -28px;
+    font-size: 36px;
+    text-align: center;
+    line-height: 44px;
+    color: #333
+}
+
+.productpageprice .spiral {
+    position: absolute;
+    top: -19px;
+    left: 25px;
+    background: url(spiral.png) no-repeat right 0;
+    height: 50px;
+    width: 35px
+}
+
+th, .th {
+    font-weight: bold;
+}
+
+thead th, .th {
+    background-color: #d5e3ee !important;
+}
+
+th, td, caption {
+    padding: 4px 10px 4px 5px;
+}
+
+tbody tr:nth-child(even) td, tbody tr.even td {
+    background: #f3f4f5;
+}
+
+tfoot {
+    font-style: italic;
+}
+
+caption {
+    background: #eee;
+}
+
+.small {
+    font-size: .8em;
+    margin-bottom: 1.875em;
+    line-height: 1.875em;
+}
+
+.large {
+    font-size: 1.2em;
+    line-height: 2.5em;
+    margin-bottom: 1.25em;
+}
+
+.hide {
+    display: none;
+}
+
+.quiet {
+    color: #666;
+}
+
+.loud {
+    color: #000;
+}
+
+.highlight {
+    background: #ff0;
+}
+
+.added {
+    background: #060;
+    color: #fff;
+}
+
+.removed {
+    background: #900;
+    color: #fff;
+}
+
+.first {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.last {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.top {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.bottom {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.bottom {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+

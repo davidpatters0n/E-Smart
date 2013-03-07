@@ -6,12 +6,8 @@ class DashboardController < ApplicationController
   # load_and_authorize_resource :user, :parent => false
 #  before_filter :admin_user, :only => [:create, :new, :index, :update]
 
-  def index
-    @title = "Dashboard"
 
-  end
-  
-   def search
+  def search
     @result = nil
 
     respond_to do |format|
@@ -24,5 +20,13 @@ class DashboardController < ApplicationController
       end
       format.js
     end
-   end
-end 
+  end
+end
+
+=begin
+The above search method sets a results variable sets it to nil,
+the respond_to block is get to format teh results in html.
+If @results is zero redirect user back to the root path and display
+error message 'No records found' else redirect to @result which will be
+the product
+=end

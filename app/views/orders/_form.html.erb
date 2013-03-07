@@ -1,5 +1,5 @@
 <%= form_for(@order) do |f| %>
-    <% if @order.errors.any? %>
+    <% if @order.errors.any? %> <!--Checks if any errors exisst. If so then display error message-->
         <div id="error_explanation">
           <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
           <ul>
@@ -32,10 +32,11 @@
     <div class="field">
       <%= f.label :card_type %><br />
       <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]] %>
+      <!--The above select takes in the set card types that were pre-defined in my "Order model"-->
     </div>
     <div class="field">
       <%= f.label :cvv %><br />
-      <%= f.password_field :cvv %>
+      <%= f.password_field :cvv %>  <!--Security number is set to password field -->
     </div>
     <div class="field">
       <%= f.label :card_expires_on %><br />
@@ -43,9 +44,11 @@
       </p>               <!--Above date select takes start date and end date. Does not allow you to select previous years by doing Date.today.year + 10 and display the month  -->
     </div>
     <%= f.hidden_field :status, :value => "Processing" %>
+    <!--By default this is set to a status processing but end users do not see this because it is a hidden_field-->
     <%= f.hidden_field :ip_address, :value => request.remote_ip  %>
+    <!--Users IP address is stored but is considered to be a hidden field.-->
     <div class="actions">
-      <% if current_user %>
+      <% if current_user %>      <!--If the current user is the user then this data will contain the necessary data.-->
           <%= f.hidden_field :user_id, :value => current_user.id %>
           </div>
       <% end %>

@@ -1,5 +1,12 @@
 # encoding: utf-8
 
+=begin
+When installing the "CarrierWave" which is responsible for enabling an admin to upload a product photo on the product/new
+page. This is the  library of where the core functions are kept. By default when installing the "carrierwave" gem this
+by default is created. Reference: jnicklas (2013) carrierwave.
+[online] Available at: https://github.com/jnicklas/carrierwave [Accessed: 21 Feb 2013].
+=end
+
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:

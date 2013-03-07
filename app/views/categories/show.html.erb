@@ -2,27 +2,47 @@
 
 <div class="left">
 
-  <h1><%= @category.name %></h1>
+  <h1><%= @category.name %></h1>  <!--Get the category name-->
 
-  <% @category.products.each do |product| %>
-      <div class="row-fluid">
-        <div class="span4">
-          <h3><%= product.title %></h3>
+  <% @category.products.each do |product| %> <!--Loop the categories and loop the products-->
 
-          <p><%= product.description %>
-            <b><%= number_to_currency(product.price, :unit => "&pound;") %></b>
-            <%=link_to 'Show', product, :class => 'btn btn-mini'%></p>
-          <%= image_tag(product.image) %>
-          <%= button_to 'Add to Cart' , line_items_path(:product_id => product) %>
+      <div class="row-fluid"> <!--Set div class part of Boostrap library-->
+        <div class="thumbnails" >
+          <div class="span4" style="padding-right: 20px;">
+            <div class="well">
+              <%= image_tag(product.image, :size => "300x300") %>  <!--Get product image and set size -->
+              <h3><%= product.title %></h3>   <!--Get product title-->
+              <p><%= product.description %>   <br/><br>       <!--Get product description -->
+              <table>
+                <tr>
+                  <td><% if product.price < 90 %>   <!--If product price is less than 90 display the following-->
+                        <span class="label label-important">Special offer <%= number_to_currency(product.price, :unit => "&pound;") %></span><br/>
+                    <% else %>
+                        <span class="label"><%= number_to_currency(product.price, :unit => "&pound;") %></span>
+                    <% end %></td>
 
-        </div>
+                  <td> <% if stock_left(product) == 0 %>
+                        <!--The abovestock_left passes in the product which has been defined in the
+                        "helper/product_helper.rb This calculates how much stock is left  -->
+                        <span class="label label-important">SOLD OUT</span> <!--Display "SOLD OUT if stock is 0-->
+                    <% elsif stock_left(product) < 5 %>
+                        <span class="label label-warning"> ONLY <%= product.stock %> Left </span><!--Display how much stock left-->
 
+                    <% else stock_left(product) > 5 %> <!--If stock is greater than 5 then display "IN STOCK"-->
+                        <span class="label label-success"> IN STOCK </span>
+                    <% end %>
+                    <%= link_to 'Show', product, :class => 'btn btn-primary btn-mini '%>
+                  </td>
+                </tr>
+              </table>
+              <% if stock_left(product) == 0 %>
+                  <%= button_to 'Add to Cart', line_items_path(:product_id => product), :class => 'btn btn-primary btn-mini ',  :disabled => true%> <!--disable button if no stock-->
+                  <% else %>
+                  <%= button_to 'Add to Cart', line_items_path(:product_id => product), :class => 'btn btn-primary btn-mini '%>
+              <% end  %>
+                  </div>
+          </div>
   <% end %>
   </div>
-</div>
-
-<footer>
-  <p>&copy; Copyright E-Smart 2012</p>
-</footer>
-
-
+  </div>
+  </div>

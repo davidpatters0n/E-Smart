@@ -62,7 +62,6 @@ ESmart::Application.configure do
   config.active_support.deprecation = :notify
 
   #Defined SMTP options
-  #config.action_mailer.default_url_options = { :host => "77.100.90.77:3000"
   #SMTP
   config.action_mailer.default_url_options = { :host => 'e-smart.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp

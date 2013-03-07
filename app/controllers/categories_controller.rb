@@ -1,10 +1,20 @@
 class CategoriesController < ApplicationController
 
- before_filter :admin, :only => [ :new, :edit, :create, :destroy, :update]
+=begin
+The first before_filter :admin only allows admin users to do the following actions. This is set in the application
+controller.
+
+Second before_filter authenticates normal users giving them access to only view the show action. This will mean that
+normal users or non-logged in users CANNOT CRUD categories. If they attempt this they will be redirected to the root
+path
+=end
+
+  before_filter :admin, :only => [:new, :edit, :create, :destroy, :update]
+  before_filter :authenticate, :except => [:show]
 
 
   def index
-    @categories = Category.all
+    @categories = Category.all # Find all categories
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +24,9 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id]) #Find and display all categories and products related to particular category
-    @products = @category.products
+    @products = @category.products #Cat the products to the categories.
+    @cart = current_cart                                   #Get current cart
+
   end
 
   def new
@@ -66,12 +78,12 @@ class CategoriesController < ApplicationController
   def destroy
 
     @category = Category.find(params[:id]) #Find cateogy id that will be deleted.
-    if @category.products.count == 0#Check using .count() to determine if category has products == 0
-      @category.destroy   #If no products then delete category
+    if @category.products.count == 0 #Check using .count() to determine if category has products == 0
+      @category.destroy #If no products then delete category
       flash[:success] = 'Category has been deleted.' #Once deleted display flash success message
       redirect_to categories_path
-    else  #Else there are products related to category then category will not be deleted and then redirected back to
-          #category index path
+    else #Else there are products related to category then category will not be deleted and then redirected back to
+         #category index path
       flash[:error] = "Category can't be deleted, there are products related to this category"
       redirect_to categories_path
     end

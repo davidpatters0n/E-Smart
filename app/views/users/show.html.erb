@@ -1,59 +1,65 @@
-<div class="center hero-unit">
-  <table class="form">
-    <tr>
-      <td>
-        <%= form_for(@user) do |f| %>
-            <% if @user.errors.any? %>
-                <div id="error_explanation" xmlns="http://www.w3.org/1999/html">
-                  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="hero-unit">
+  <div class="row">
+    <div class="span4">
+      <%= form_for(@user) do |f| %>
+          <% if @user.errors.any? %>
+              <div id="error_explanation" xmlns="http://www.w3.org/1999/html">
+                <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-                  <ul>
-                    <% @user.errors.full_messages.each do |msg| %>
-                        <li><%= msg %></li>
-                    <% end %>
-                  </ul>
-                </div>
-            <% end %>
-            </td>
-            </tr>
+                <ul>
+                  <% @user.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+          <table class="table">
+            <thead>
             <tr>
-              <td class="th" colspan="2">Login Details</td>
+              <th>Login Details</th>
+              <th></th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
               <% if @user.id %>
+
                   <td><%= f.label :id %></td>
                   <td><%= @user.id %></td>
-
+                  <!--Show user ID-->
               <% end %>
+
             </tr>
-            <tr>
+            <tr class="info">
+
               <td><%= f.label :current_sign_in_at, "Sign in time" %></td>
               <td><%= @user.current_sign_in_at.nil? ? "Not signed in" : @user.current_sign_in_at.strftime('%d-%b-%Y %H:%M:%S') %></td>
-
+              <!--If user sign in is NIL then display not signed in -->
             </tr>
             <tr>
-              <td> <%= f.label :first_name %>
-                <br/></td>
+              <td><%= f.label :first_name %></td>
               <td><%= @user.first_name %></td>
+              <!--Display first name-->
             </tr>
-            <tr>
+            <tr class="info">
               <td><%= f.label :last_name %>
-                <br/></td>
               <td><%= @user.last_name %></td>
+              <!--Display last name-->
             </tr>
             <tr>
-              <td><%= f.label :email %>
-                <br/></td>
+              <td><%= f.label :email %></td>
               <td><%= @user.email %></td>
+              <!--Display email-->
             </tr>
             <% if can? :manage, :all %>
-                <tr>
-                  <td class="th" colspan=2>Roles and Privileges</td>
+                <tr class="info">
+                  <td colspan=2>Roles and Privileges</td>
                 </tr>
                 <tr>
                   <% for role in Role.all %>
                       <td><%= role.name %><%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role), :disabled => true %></td>
-                  <% end %>
+                  <% end %>     <!--Display roles however it is disabled therefore it cannot be changed!-->
                 </tr>
             <% end %>
             <tr>
@@ -62,35 +68,54 @@
                 <%= link_to 'Back', usermanagement_path, :class => 'btn btn-medium' %>
               </td>
             </tr>
-                </table>
-
-            <table class="form" >
+            </tbody>
+          </table>
+          </div>
+          <div class="span6">
+            <table class="table">
               <% if @user == current_user %>
-                  <caption><b>Previous Orders</b></caption>
                   <thead>
                   <tr>
-                    <th>Order No:</th>
+                    <th>Previous Orders</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr>
+                    <th>Order No</th>
                     <th>Order Date</th>
                     <th>Quantity</th>
+                    <th>Status</th>
                     <th>Total</th>
                     <th>View Order</th>
                   </tr>
                   </thead>
-                  <% current_user.orders.each do |order| %>
+                  <% current_user.orders.each do |order| %>     <!--Loop current users orders-->
+                      <tbody>
                       <tr>
                         <td><%= order.id %></td>
+                        <!--Get order id -->
                         <td><%= order.created_at.to_s(:short) %></td>
+                        <!--Get order date in short format-->
                         <td><%= order.quantity %></td>
+                        <!--Get and display quantity-->
+                        <td><%= order.status %></td>
+                        <!--Get and display status-->
                         <td><%= number_to_currency(order.total_price, :unit => "£") %></td>
-                        <td><%= link_to 'View Order',(order)%></td>
+                        <!--Convert total_price into currency format and add "£" -->
+                        <td><%= link_to 'View Order', (order) %></td>
+                        <!--Display link to view your order-->
                       </tr>
+                      </tbody>
+                      </table>
+                      </div>
+                      </div>
+                      </div>
+
                   <% end %>
-                  <% if current_user.orders.empty? %>
-                      <tr>
-                        <td>No bookings found</td>
-                      </tr>
-                  <% end %>
-                  </table>
-        <% end %>
-            </div>
-<% end %>
+              <% end %>
+      <% end %>
+
+

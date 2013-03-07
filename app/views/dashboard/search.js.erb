@@ -2,4 +2,6 @@
 alert( "No records found" );
 <% else %>
 location.href='<%= url_for(@result) %>';
-<% end %> 
+<% end %>
+
+/*If the result is nil then display the alert "No Records found" if the results are found then redirect to the results.*/

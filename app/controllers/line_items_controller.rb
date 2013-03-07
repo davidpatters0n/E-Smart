@@ -39,28 +39,22 @@ class LineItemsController < ApplicationController
     @line_item = @cart.line_items.build(:product_id => product.id) #.build function creates a new line item that takes in the
     @line_item = @cart.add_product(product.id) #product_id, and uses the .add function to add it to @line_item
     respond_to do |format|
-      if @line_item.save
-        format.html { redirect_to root_url }
-        format.xml { render :xml => @line_item,
-                            :status => :created, :location => @line_item }
+      if @line_item.save #If line_item save then redirect to root_url
+        format.html { redirect_to :back }
       else
-        format.html { render :action => "new" }
-        format.xml { render :xml => @line_item.errors,
-                            :status => :unprocessable_entity }
+        format.html { render :action => "new" }#Else if the line_item is not saved then render 'new' action "line_items/new.html.erb"
       end
     end
   end
 
   def update
-    @line_item = LineItem.find(params[:id])
+    @line_item = LineItem.find(params[:id]) #Find line_item by passing in the :id into the params.
 
     respond_to do |format|
-      if @line_item.update_attributes(params[:line_item])
+      if @line_item.update_attributes(params[:line_item])#If the changes were updated correctly redirect and display message
         format.html { redirect_to @line_item, notice: 'Line item was successfully updated.' }
-        format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+        format.html { render action: "edit" } #If attribute changes were not updated render 'edit' action.
       end
     end
   end

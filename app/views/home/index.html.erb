@@ -1,36 +1,40 @@
-<div class="span9 span-fixed-sidebar">
-  <div class="hero-unit">
-    <h1>Welcome to E-Smart</h1>
-    <p>At E-Smart we are offering you a great range of products at an affordable price, whilst offering you the best
-      online shopping experience. Offering a wide range computer peripherals and components.</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
 
-    <p><a class="btn btn-primary btn-large" href="<%=about_url%>">Learn More&raquo;</a></p>
-  </div>
-</div>
-<% @products.each do |product| %>
-    <table></table>
-    <div class="row-fluid">
 
-      <div class="span4">
-        <h3><%= product.title %></h3>
-
-        <p><%= product.description %>
-          <b><%= number_to_currency(product.price, :unit => "&pound;") %></b>
-          <%=link_to 'Show', product, :class => 'btn btn-mini'%></p>
-        <%= image_tag(product.image) %>
-        <% if stock_left(product) == 0  %>
-         <p style="color:red"><strong>SOLD OUT</strong></p>
-        <% else %>
-            <%= button_to 'Add to Cart' , line_items_path(:product_id => product) %>
-        <% end %>
-            <!--:remote true sets the respond_to in the controller to respond to js -->
-
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide carousel-fade">
+  <div class="carousel-inner">
+    <div class="item active">
+      <%= image_tag("ocz-promo.jpg") %>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>About</h1>
+          <p class="lead">At E-Smart we are offering you a great range of products at an affordable price, whilst offering you the best
+            online shopping experience. Offering a wide range computer peripherals and components at valuable prices.
+          </p><br /><br /><br /><br /><br /><br /><br />
+          <a class="btn btn-large btn-primary" href="<%= about_path %>">About</a>
+        </div>
       </div>
+    </div>
+    <div class="item">
+      <%= image_tag("nvidia_promo.jpg")%>
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Sign Up!</h1>
+          <p class="lead">Sign up today and recieve benefical promotional offers</p>
+          <a class="btn btn-large btn-primary" href="<%= user_session_path %>">Sign up today</a>
 
-<% end %>
-</div>
-<center>
-<footer>
-  <%= image_tag("Reassurance.jpg") %>
-</footer>
-  </center>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+     <%=  image_tag("intel_promo.jpg") %>
+
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <!--html5 data attribute passes previous and next to the id "myCarousel" -->
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->

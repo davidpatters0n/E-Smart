@@ -1,6 +1,4 @@
-<h1>Products</h1>
-
-<table class="table table-striped table-bordered">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="datatable">
   <thead>
   <tr>
     <th>Name</th>
@@ -15,14 +13,20 @@
   </tr>
   </thead>
   <tbody>
-  <% @products.each do |product| %>
+  <% @products.each do |product| %>  <!--Loop the products -->
       <tr>
-        <td><%= product.title %></td>
+        <td><%= product.title %></td>  <!--Get the product title -->
         <td><%= image_tag(product.image, :size => "60x60", :alt => "Edit Entry") %></td>
-        <td><%= product.stock %></td>
+        <!--Get the image and set size to 60 x 60  -->
+        <td><%= product.stock %></td> <!--Get the product stock-->
         <td><%= stock_left(product) %></td>
+        <!--Get the stock left from the "helper/product_helper.rb and pass in the product-->
         <td><%= product.category.try(:name) %></td>
+        <!--Get the products category using the .try() to avoid NoMethodError. -->
         <td><%= number_to_currency(product.price, :unit => "&pound;") %></td>
+        <!--Convert the price into currency format and pass in the product price whilst adding "£" -->
+
+        <!--Following buttons are used for navigation -->
         <td> <%=link_to "Edit", edit_product_path(product), :class => 'btn btn-mini'%></td>
         <td> <%=link_to 'Show', product, :class => 'btn btn-mini'%></td>
         <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, :class =>  'btn btn-mini btn-danger' %></td>
@@ -30,6 +34,7 @@
   <% end %>
   </tbody>
 </table>
+<!--Link to new product path, product controller will use the CREATE action to handle this -->
 <%= link_to 'New Product', new_product_path, :class => 'btn btn-primary' %>
 
 

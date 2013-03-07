@@ -1,35 +1,76 @@
-<%- model_class = Product -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+<div id="maincontainer"> <!--Put page into a container-->
+  <section id="product"> <!--HTML5 tag that is used to define section in the document-->
+    <div class="container">
+      <div class="row">
+        <!-- Left Image-->
+        <div class="span5"> <!--Span image -->
+          <ul class="thumbnails mainimage"> <!--class supplied by boostrap-->
+            <%= image_tag(@product.image) %> <!--Get the product image-->
+          </ul>
+        </div>
+        <!-- Right Details-->
+        <div class="span7"> <!--Span 7 will span the page right. Used the <span></span> to split the page -->
+          <div class="row">
+            <div class="span7">
+              <h1 class="productname"><%= @product.title %></h1>  <!--Get product title -->
+              <div class="productprice">
+                <div class="productpageprice"> </div>
+              </div>
+
+              <!-- Product Description tab & comments-->
+              <div class="productdesc">
+                <ul class="nav nav-tabs" id="myTab">
+                  <li class="active"><a href="#description">Description</a>
+                </ul>
+                <div class="tab-content">
+                  <div class="tab-pane active" id="description">
+                    <h2><%= number_to_currency(@product.price, :unit => "&pound;") %></h2>
+                    <div class="well">
+                    <%= @product.description %> <br>   <!--Get product description-->
+                    <br>
+                    </div>
+                    <ul class="listoption3">
+                      <dt><strong>Category:</strong></dt>
+                      <dd><%= @product.category.try(:name) %></dd>  <!--Get products cateogry name -->
+                      <dt><strong>Avaliability:</strong></dt>
+                      <% if stock_left(@product) == 0 %>
+                     <!--Perform if statement to check if product is in stock or not. If not in stock display SOLD OUT-->
+                          <span class="label label-important">SOLD OUT</span>
+                      <% elsif stock_left(@product) < 5 %>
+                          <span class="label label-warning"> ONLY <%= @product.stock %> Left </span>
+
+                      <% else stock_left(@product) > 5 %>
+                          <span class="label label-success"> IN STOCK </span>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <ul class="productpagecart">
+                    <% if stock_left(@product) == 0 %>
+                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ',  :disabled => true%> <!--disable button if no stock-->
+                    <% else %>
+                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini '%>
+                    <% end  %>                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-  <dd><%= @product.title %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @product.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
-  <dd><%= image_tag(@product.image) %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= number_to_currency(@product.price, :unit => "&pound;") %></dd>
-  <dt><strong>Category:</strong></dt>
-  <dd><%= @product.category.try(:name) %></dd>
-  <dt><strong>Quantity:</strong></dt>
-  <dd><%= @product.stock %></dd>
-</dl>
-
-
-<% if can? :manage, @product %>
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              products_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_product_path(@product), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              product_path(@product),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+<% if can? :manage, @product %>     <!--If user can manage prodcuts then make the following options visible-->
+    <div class="form-actions">
+      <%= link_to t('.back', :default => t("helpers.links.back")),
+                  products_path, :class => 'btn'  %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_product_path(@product), :class => 'btn' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  product_path(@product),
+                  :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+    </div>
 
 <% end %>

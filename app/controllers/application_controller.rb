@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  #  before_filter :authenticate_user!
-  #   load_and_authorize_resource
-  #Code below for current_cart references "Agile Web Development (page ....)"
+=begin
+Code on Line 22-28 for current_cart references
+Ruby, S. and Thomas, D. (2011) Agile web development with Rails. 4th ed. Raleigh, NC: Pragmatic Bookshelf, p.122.
+=end
 
   # if you want to skip authentication, use:
   # skip_before_filter :authenticate_user!
@@ -28,37 +29,36 @@ class ApplicationController < ActionController::Base
   end
 
 =begin
-          FILTERS
+          FILTERS used to manage pages
+          Purpose of filters are to run before the controller is loaded.
+          If the user does meet the filters then they cannot access this page
 =end
 
   def admin
     unless can? :manage, :all
       #if logged user is not admin display error message and redirect to application INDEX (store_path)
-      flash[:error] = "Admin can only do this"
-      redirect_to root_path
+      flash[:error] = "Admin can only do this" #Display error message
+      redirect_to root_path #Redirect user to root_path (home page)
     end
   end
 
   def authenticate
-    access_denied unless signed_in?
-  end
+    access_denied unless signed_in? #Authenticate method takes in 'access_denied' method
+  end                                #and checks if they are signed_in? if they are not deny access
 
   def access_denied
-    if current_user
-      redirect_to root_url
-      flash[:error] = 'You do not have the privledges'
-    else
+    if current_user # If current_user redirect_to root_url./
       redirect_to root_url
       flash[:error] = 'You do not have the privledges'
     end
   end
 
   def correct_user
-    @user = User.find(params[:id])
-    if can? :manage, :all
-      #Allow admin to access everyone account
+    @user = User.find(params[:id]) #Find the correct user by passing in User id
+    if can? :manage, :all #If user can :manage, :all then give them access to all users accounts
+                          #Allow admin to access everyone account
     else
-      @user == current_user
+      @user == current_user #Else if user is the current user and do not have these credentials they are rejected
     end
   end
 end

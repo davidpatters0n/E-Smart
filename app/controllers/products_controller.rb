@@ -1,12 +1,29 @@
 class ProductsController < ApplicationController
+=begin
+The following before_filter that was set in the application_controller is applied in the products_controller
+To prevent normal users and non-registered users from viewing the back core index and CRUD [Create, Read, Update, Delete]
+pages of the products.
 
-    before_filter :admin, :only => [:index, :new, :edit, :create, :destroy, :update]
+=end
+  before_filter :admin, :only => [:index, :new, :edit, :create, :destroy, :update]
+
+=begin
+A vital principle that Ruby on Rails incoporates is Convetnion Over Configuration. It
+can be seen in alot the controllers that the methods are set up by default which makes it
+easier for the developer to rapidly construct CRUD applications. Although these methods can be altered
+to whaterver is required.
+
+=end
 
 
   def index
-    #  @products = Product.all
-    @category = Category.all
+
+   # @category = Category.all #Get all categories
     @products = Product.filter(params[:search], [:title])
+
+=begin
+  Filter out the product search based on the title inputted into the params.
+=end
     # @products = Product.search(params[:search])
     respond_to do |format|
       format.html
@@ -17,6 +34,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @cart = current_cart #Get current cart
+
 
     respond_to do |format|
       format.html
@@ -71,7 +90,7 @@ class ProductsController < ApplicationController
       @product.destroy #If product does not have any line items delete product
       flash[:success] = 'Product successfully deleted'
       redirect_to products_path
-    else
+    else #If product has line_items display the below flash error and redirect back to product index page.
       flash[:error] = 'Prodcut is attached to order and cannot be deleted'
     end
   end

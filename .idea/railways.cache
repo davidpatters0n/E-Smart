@@ -77,16 +77,20 @@ cancel_user_registration GET    /users/cancel(.:format)           devise/registr
                role_user GET    /role_users/:id(.:format)         role_users#show
                          PUT    /role_users/:id(.:format)         role_users#update
                          DELETE /role_users/:id(.:format)         role_users#destroy
+                contacts POST   /contacts(.:format)               contact_us/contacts#create
+             new_contact GET    /contacts/new(.:format)           contact_us/contacts#new
+              contact_us        /contact-us(.:format)             contact_us/contacts#new
   shipping_returns_index GET    /shipping_returns/index(.:format) shipping_returns#index
-           contact_index GET    /contact/index(.:format)          contact#index
+           payment_index GET    /payment/index(.:format)          payment#index
               home_index GET    /home/index(.:format)             home#index
              about_index GET    /about/index(.:format)            about#index
                          GET    /shipping_returns/index(.:format) shipping_returns#index
           usermanagement GET    /usermanagement(.:format)         usermanagement#index
                dashboard GET    /dashboard(.:format)              dashboard#index
+                 payment GET    /payment(.:format)                payments#index
                                 /products(.:format)               products#index
                    about        /about(.:format)                  about#index
-                 contact        /contact(.:format)                contact#index
+                                /payment(.:format)                payments#index
                     home        /home(.:format)                   home#index
                 shipping        /shipping(.:format)               shipping_returns#index
         new_user_session GET    /login(.:format)                  devise/sessions#new
@@ -107,3 +111,6 @@ cancel_user_registration GET    /users/cancel(.:format)           devise/registr
                          GET    /users/confirmation(.:format)     devise/confirmations#show
                   search POST   /search(.:format)                 home#search
                     root        /                                 home#index
+                         POST   /contacts(.:format)               contact_us/contacts#create
+                         GET    /contacts/new(.:format)           contact_us/contacts#new
+              contact_us        /contact-us(.:format)             contact_us/contacts#new
