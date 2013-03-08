@@ -95,3 +95,5 @@ to whaterver is required.
     end
   end
 end
+
+#End Products controller
