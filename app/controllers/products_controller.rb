@@ -5,7 +5,7 @@ To prevent normal users and non-registered users from viewing the back core inde
 pages of the products.
 
 =end
-  before_filter :admin, :only => [:index, :new, :edit, :create, :destroy, :update]
+  before_filter :admin, :only => [:new, :edit, :create, :destroy, :update]
 
 =begin
 A vital principle that Ruby on Rails incoporates is Convetnion Over Configuration. It

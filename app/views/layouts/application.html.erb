@@ -60,17 +60,18 @@ http://www.w3resource.com/twitter-bootstrap/navbar-tutorial.php
       <!--Goes to home page  -->
     </div>
     <div class="pull-right">
-      <form class="navbar-search pull-left">
+
         <!-- The form_tag goes to the products_path and uses a
              'get' method that is set in the routes "config/routes".
 
              The text_field_tag passes in the :search paramaeter and displays
              a default placeholder "Search"
         -->
+      <ul class="nav">
         <%= form_tag products_path, :method => 'get' do %>
             <%= text_field_tag :search, params[:search], :placeholder => "Search" %>
         <% end %>
-      </form>
+      </ul>
       <ul class="nav">
         <!--Following <#%if %> checks to see if the user is signed in
             if they are logged in then it will display the 'My Account Link' and
@@ -191,15 +192,7 @@ http://www.w3resource.com/twitter-bootstrap/navbar-tutorial.php
     because page is not evaluated after it has loaded
  -->
 
-<center>
-  <footer>
-    <%= image_tag("Reassurance.gif") %>
-  </footer>
-  <footer>
-    <p>&copy; Copyright E-Smart 2012 </p>
-    <b><h3><span class="label label-important">NOT A REAL SHOP!</span></h3></b>
-  </footer>
-</center>
+
 
 
 </body>
