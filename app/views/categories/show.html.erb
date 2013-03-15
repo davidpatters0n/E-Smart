@@ -25,6 +25,7 @@
               <span class="label "><%= number_to_currency(product.price, :unit => "&pound;") %></span>
           <% end %>
           <%= link_to 'Show', product, :class => 'btn btn-primary btn-mini '%>
+
           <% if stock_left(product) == 0 %>
               <%= button_to 'Add to Cart', line_items_path(:product_id => product), :class => 'btn btn-primary btn-mini ',  :disabled => true%> <!--disable button if no stock-->
           <% else %>
@@ -48,7 +49,7 @@
     <%= image_tag("Reassurance.gif") %>
   </footer>
   <footer>
-    <p>&copy; Copyright E-Smart 2012 </p>
+    <p>&copy; Copyright E-Smart 2013 </p>
     <b><h3><span class="label label-important">NOT A REAL SHOP!</span></h3></b>
   </footer>
 </center>

@@ -12,9 +12,9 @@
         <div class="span7"> <!--Span 7 will span the page right. Used the <span></span> to split the page -->
           <div class="row">
             <div class="span7">
-              <h1 class="productname"><%= @product.title %></h1>  <!--Get product title -->
+              <h1 class="productname"><%= @product.title %></h1> <!--Get product title -->
               <div class="productprice">
-                <div class="productpageprice"> </div>
+                <div class="productpageprice"></div>
               </div>
 
               <!-- Product Description tab & comments-->
@@ -25,32 +25,89 @@
                 <div class="tab-content">
                   <div class="tab-pane active" id="description">
                     <h2><%= number_to_currency(@product.price, :unit => "&pound;") %></h2>
+
                     <div class="well">
-                    <%= @product.description %> <br>   <!--Get product description-->
-                    <br>
+                      <%= @product.description %> <br /> <br /> <!--Get product description-->
+                      Average Rating: <%= @product.reviews.average(:rating).to_i.times do %>
+                          <!--Find product object and get average reviews and convert average into integer and call
+                           .times method to loop and then display and set stars to 20x20-->
+                          <%= image_tag "star.gif", :size => "20x20" %>
+                      <% end %>
+                      <br>
                     </div>
                     <ul class="listoption3">
                       <dt><strong>Category:</strong></dt>
-                      <dd><%= @product.category.try(:name) %></dd>  <!--Get products cateogry name -->
+                      <dd><%= @product.category.try(:name) %></dd>
+                      <!--Product object gets cateogry name -->
                       <dt><strong>Avaliability:</strong></dt>
                       <% if stock_left(@product) == 0 %>
-                     <!--Perform if statement to check if product is in stock or not. If not in stock display SOLD OUT-->
+                          <!--Perform if statement to check if product is in stock or not. If not in stock display SOLD OUT-->
                           <span class="label label-important">SOLD OUT</span>
                       <% elsif stock_left(@product) < 5 %>
                           <span class="label label-warning"> ONLY <%= @product.stock %> Left </span>
 
-                      <% else stock_left(@product) > 5 %>
+                      <% else
+                           stock_left(@product) > 5 %>
                           <span class="label label-success"> IN STOCK </span>
                       <% end %>
                     </ul>
                   </div>
                   <ul class="productpagecart">
                     <% if stock_left(@product) == 0 %>
-                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ',  :disabled => true%> <!--disable button if no stock-->
+                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ', :disabled => true %> <!--disable button if no stock-->
                     <% else %>
-                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini '%>
-                    <% end  %>                    </li>
+                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ' %>
+                    <% end %>
                   </ul>
+                  <% @product.reviews.each do |review| %> <!--Product object loops reviews and set review variable-->
+                      <hr>
+                      <div><b><%= review.title %></b> <%#= link_to 'Delete Review', product_reviews_path(review.product, review), :confirm => "Do you want to remove comment?" , :method => 'delete' %><br>
+                       <!--GET the product review path and pass in the review that belongs to that product along with
+                       the review variable. :confirm brings up a javascript alert when the delete button is pressed
+                       and the type of method is a 'delete' method-->
+
+                        <!--Get review title-->
+                        <%= review.author %> said <%= time_ago_in_words(review.created_at) %> ago
+                        <!--Get review author and use "time_ago_in_words" converts created at into sentence-->
+                        <br/>
+
+                        <p><%= review.content %></p> <!--Get review content-->
+                        <%= review.rating.times do %>    <!--Loop review rating-->
+                            <%= image_tag "star.gif", :size => "20x20" %>
+                        <% end %>
+                      </div>
+                  <% end %>
+                  <hr>
+                  <hr>
+                  <%= form_for [@product, @product.reviews.build] do |f| %>
+                      <!--Get product object and get prouct review object and build a new form -->
+                      <div class="info">
+                        <%= f.label :title %>
+                        <br/>
+                        <%= f.text_field :title %>
+                      </div>
+                      <div>
+                        <%= f.label :author %>
+                        <br/>
+                        <%= f.text_field :author %>
+                      </div>
+                      <div class="info">
+                        <%= f.label :content %>
+                        <br/>
+                        <%= f.text_area :content,  :cols => 10, :rows => 10 %>
+                        <!--Set text area 10 cols by 10 rows-->
+                      </div>
+                      <div>
+                        <%= f.label :rating %>
+                        <br/>
+                        <%= f.select(:rating, options_for_select(1..5)) %>
+                        <!--Option_for_select allows you to create a range of numbers instead of having to manually
+                        type in a number you can just select a number -->
+                      </div>
+                        <div class="info">
+                          <%= f.submit %>
+                        </div>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -63,13 +120,13 @@
 <% if can? :manage, @product %>     <!--If user can manage prodcuts then make the following options visible-->
     <div class="form-actions">
       <%= link_to t('.back', :default => t("helpers.links.back")),
-                  products_path, :class => 'btn'  %>
+                  products_path, :class => 'btn' %>
       <%= link_to t('.edit', :default => t("helpers.links.edit")),
                   edit_product_path(@product), :class => 'btn' %>
       <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                   product_path(@product),
                   :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
                   :class => 'btn btn-danger' %>
     </div>
 
@@ -79,7 +136,7 @@
     <%= image_tag("Reassurance.gif") %>
   </footer>
   <footer>
-    <p>&copy; Copyright E-Smart 2012 </p>
+    <p>&copy; Copyright E-Smart 2013 </p>
     <b><h3><span class="label label-important">NOT A REAL SHOP!</span></h3></b>
   </footer>
 </center>

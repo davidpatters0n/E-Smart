@@ -25,6 +25,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])  #To show user pass in user_id
     @users = User.all
     @roles = Role.all
+    @cart = current_cart                                   #Get current cart
 
     if current_user.role? :administrator #If user is an admin they can view all users profile.
       @title = @user.first_name

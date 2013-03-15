@@ -9,33 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require dataTables/jquery.dataTables.bootstrap
  *= require_tree .
  */
 
 /*table {margin-bottom:1.4em;width:100%;} */
-
-.productpageprice {
-    width: 250px;
-    height: 58px;
-    background: url(/pricetagproduct.png) no-repeat right 0;
-    position: relative;
-    padding: 9px 0 9px 20px;
-    margin: 45px 0 10px -28px;
-    font-size: 36px;
-    text-align: center;
-    line-height: 44px;
-    color: #333
-}
-
-.productpageprice .spiral {
-    position: absolute;
-    top: -19px;
-    left: 25px;
-    background: url(spiral.png) no-repeat right 0;
-    height: 50px;
-    width: 35px
-}
 
 th, .th {
     font-weight: bold;

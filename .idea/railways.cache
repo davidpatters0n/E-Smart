@@ -1,116 +1,123 @@
-        new_user_session GET    /users/sign_in(.:format)          devise/sessions#new
-            user_session POST   /users/sign_in(.:format)          devise/sessions#create
-    destroy_user_session DELETE /users/sign_out(.:format)         devise/sessions#destroy
-           user_password POST   /users/password(.:format)         devise/passwords#create
-       new_user_password GET    /users/password/new(.:format)     devise/passwords#new
-      edit_user_password GET    /users/password/edit(.:format)    devise/passwords#edit
-                         PUT    /users/password(.:format)         devise/passwords#update
-cancel_user_registration GET    /users/cancel(.:format)           devise/registrations#cancel
-       user_registration POST   /users(.:format)                  devise/registrations#create
-   new_user_registration GET    /users/sign_up(.:format)          devise/registrations#new
-  edit_user_registration GET    /users/edit(.:format)             devise/registrations#edit
-                         PUT    /users(.:format)                  devise/registrations#update
-                         DELETE /users(.:format)                  devise/registrations#destroy
-       user_confirmation POST   /users/confirmation(.:format)     devise/confirmations#create
-   new_user_confirmation GET    /users/confirmation/new(.:format) devise/confirmations#new
-                         GET    /users/confirmation(.:format)     devise/confirmations#show
-                  orders GET    /orders(.:format)                 orders#index
-                         POST   /orders(.:format)                 orders#create
-               new_order GET    /orders/new(.:format)             orders#new
-              edit_order GET    /orders/:id/edit(.:format)        orders#edit
-                   order GET    /orders/:id(.:format)             orders#show
-                         PUT    /orders/:id(.:format)             orders#update
-                         DELETE /orders/:id(.:format)             orders#destroy
-              line_items GET    /line_items(.:format)             line_items#index
-                         POST   /line_items(.:format)             line_items#create
-           new_line_item GET    /line_items/new(.:format)         line_items#new
-          edit_line_item GET    /line_items/:id/edit(.:format)    line_items#edit
-               line_item GET    /line_items/:id(.:format)         line_items#show
-                         PUT    /line_items/:id(.:format)         line_items#update
-                         DELETE /line_items/:id(.:format)         line_items#destroy
-                   carts GET    /carts(.:format)                  carts#index
-                         POST   /carts(.:format)                  carts#create
-                new_cart GET    /carts/new(.:format)              carts#new
-               edit_cart GET    /carts/:id/edit(.:format)         carts#edit
-                    cart GET    /carts/:id(.:format)              carts#show
-                         PUT    /carts/:id(.:format)              carts#update
-                         DELETE /carts/:id(.:format)              carts#destroy
-                   users GET    /users(.:format)                  users#index
-                         POST   /users(.:format)                  users#create
-                new_user GET    /users/new(.:format)              users#new
-               edit_user GET    /users/:id/edit(.:format)         users#edit
-                    user GET    /users/:id(.:format)              users#show
-                         PUT    /users/:id(.:format)              users#update
-                         DELETE /users/:id(.:format)              users#destroy
-              categories GET    /categories(.:format)             categories#index
-                         POST   /categories(.:format)             categories#create
-            new_category GET    /categories/new(.:format)         categories#new
-           edit_category GET    /categories/:id/edit(.:format)    categories#edit
-                category GET    /categories/:id(.:format)         categories#show
-                         PUT    /categories/:id(.:format)         categories#update
-                         DELETE /categories/:id(.:format)         categories#destroy
-                products GET    /products(.:format)               products#index
-                         POST   /products(.:format)               products#create
-             new_product GET    /products/new(.:format)           products#new
-            edit_product GET    /products/:id/edit(.:format)      products#edit
-                 product GET    /products/:id(.:format)           products#show
-                         PUT    /products/:id(.:format)           products#update
-                         DELETE /products/:id(.:format)           products#destroy
-                         GET    /products(.:format)               products#index
-                         POST   /products(.:format)               products#create
-                         GET    /products/new(.:format)           products#new
-                         GET    /products/:id/edit(.:format)      products#edit
-                         GET    /products/:id(.:format)           products#show
-                         PUT    /products/:id(.:format)           products#update
-                         DELETE /products/:id(.:format)           products#destroy
-                   roles GET    /roles(.:format)                  roles#index
-                         POST   /roles(.:format)                  roles#create
-                new_role GET    /roles/new(.:format)              roles#new
-               edit_role GET    /roles/:id/edit(.:format)         roles#edit
-                    role GET    /roles/:id(.:format)              roles#show
-                         PUT    /roles/:id(.:format)              roles#update
-                         DELETE /roles/:id(.:format)              roles#destroy
-              role_users GET    /role_users(.:format)             role_users#index
-                         POST   /role_users(.:format)             role_users#create
-           new_role_user GET    /role_users/new(.:format)         role_users#new
-          edit_role_user GET    /role_users/:id/edit(.:format)    role_users#edit
-               role_user GET    /role_users/:id(.:format)         role_users#show
-                         PUT    /role_users/:id(.:format)         role_users#update
-                         DELETE /role_users/:id(.:format)         role_users#destroy
-                contacts POST   /contacts(.:format)               contact_us/contacts#create
-             new_contact GET    /contacts/new(.:format)           contact_us/contacts#new
-              contact_us        /contact-us(.:format)             contact_us/contacts#new
-  shipping_returns_index GET    /shipping_returns/index(.:format) shipping_returns#index
-           payment_index GET    /payment/index(.:format)          payment#index
-              home_index GET    /home/index(.:format)             home#index
-             about_index GET    /about/index(.:format)            about#index
-                         GET    /shipping_returns/index(.:format) shipping_returns#index
-          usermanagement GET    /usermanagement(.:format)         usermanagement#index
-               dashboard GET    /dashboard(.:format)              dashboard#index
-                 payment GET    /payment(.:format)                payments#index
-                                /products(.:format)               products#index
-                   about        /about(.:format)                  about#index
-                                /payment(.:format)                payments#index
-                    home        /home(.:format)                   home#index
-                shipping        /shipping(.:format)               shipping_returns#index
-        new_user_session GET    /login(.:format)                  devise/sessions#new
-            user_session POST   /login(.:format)                  devise/sessions#create
-    destroy_user_session GET    /logout(.:format)                 devise/sessions#destroy
-                         POST   /users/password(.:format)         devise/passwords#create
-                         GET    /users/password/new(.:format)     devise/passwords#new
-                         GET    /users/password/edit(.:format)    devise/passwords#edit
-                         PUT    /users/password(.:format)         devise/passwords#update
-                         GET    /users/cancel(.:format)           devise/registrations#cancel
-                         POST   /users(.:format)                  devise/registrations#create
-                         GET    /users/sign_up(.:format)          devise/registrations#new
-                         GET    /users/edit(.:format)             devise/registrations#edit
-                         PUT    /users(.:format)                  devise/registrations#update
-                         DELETE /users(.:format)                  devise/registrations#destroy
-                         POST   /users/confirmation(.:format)     devise/confirmations#create
-                         GET    /users/confirmation/new(.:format) devise/confirmations#new
-                         GET    /users/confirmation(.:format)     devise/confirmations#show
-                  search POST   /search(.:format)                 home#search
-                    root        /                                 home#index
-                         POST   /contacts(.:format)               contact_us/contacts#create
-                         GET    /contacts/new(.:format)           contact_us/contacts#new
-              contact_us        /contact-us(.:format)             contact_us/contacts#new
+        new_user_session GET    /users/sign_in(.:format)                     devise/sessions#new
+            user_session POST   /users/sign_in(.:format)                     devise/sessions#create
+    destroy_user_session DELETE /users/sign_out(.:format)                    devise/sessions#destroy
+           user_password POST   /users/password(.:format)                    devise/passwords#create
+       new_user_password GET    /users/password/new(.:format)                devise/passwords#new
+      edit_user_password GET    /users/password/edit(.:format)               devise/passwords#edit
+                         PUT    /users/password(.:format)                    devise/passwords#update
+cancel_user_registration GET    /users/cancel(.:format)                      devise/registrations#cancel
+       user_registration POST   /users(.:format)                             devise/registrations#create
+   new_user_registration GET    /users/sign_up(.:format)                     devise/registrations#new
+  edit_user_registration GET    /users/edit(.:format)                        devise/registrations#edit
+                         PUT    /users(.:format)                             devise/registrations#update
+                         DELETE /users(.:format)                             devise/registrations#destroy
+       user_confirmation POST   /users/confirmation(.:format)                devise/confirmations#create
+   new_user_confirmation GET    /users/confirmation/new(.:format)            devise/confirmations#new
+                         GET    /users/confirmation(.:format)                devise/confirmations#show
+                  orders GET    /orders(.:format)                            orders#index
+                         POST   /orders(.:format)                            orders#create
+               new_order GET    /orders/new(.:format)                        orders#new
+              edit_order GET    /orders/:id/edit(.:format)                   orders#edit
+                   order GET    /orders/:id(.:format)                        orders#show
+                         PUT    /orders/:id(.:format)                        orders#update
+                         DELETE /orders/:id(.:format)                        orders#destroy
+              line_items GET    /line_items(.:format)                        line_items#index
+                         POST   /line_items(.:format)                        line_items#create
+           new_line_item GET    /line_items/new(.:format)                    line_items#new
+          edit_line_item GET    /line_items/:id/edit(.:format)               line_items#edit
+               line_item GET    /line_items/:id(.:format)                    line_items#show
+                         PUT    /line_items/:id(.:format)                    line_items#update
+                         DELETE /line_items/:id(.:format)                    line_items#destroy
+                   carts GET    /carts(.:format)                             carts#index
+                         POST   /carts(.:format)                             carts#create
+                new_cart GET    /carts/new(.:format)                         carts#new
+               edit_cart GET    /carts/:id/edit(.:format)                    carts#edit
+                    cart GET    /carts/:id(.:format)                         carts#show
+                         PUT    /carts/:id(.:format)                         carts#update
+                         DELETE /carts/:id(.:format)                         carts#destroy
+                   users GET    /users(.:format)                             users#index
+                         POST   /users(.:format)                             users#create
+                new_user GET    /users/new(.:format)                         users#new
+               edit_user GET    /users/:id/edit(.:format)                    users#edit
+                    user GET    /users/:id(.:format)                         users#show
+                         PUT    /users/:id(.:format)                         users#update
+                         DELETE /users/:id(.:format)                         users#destroy
+              categories GET    /categories(.:format)                        categories#index
+                         POST   /categories(.:format)                        categories#create
+            new_category GET    /categories/new(.:format)                    categories#new
+           edit_category GET    /categories/:id/edit(.:format)               categories#edit
+                category GET    /categories/:id(.:format)                    categories#show
+                         PUT    /categories/:id(.:format)                    categories#update
+                         DELETE /categories/:id(.:format)                    categories#destroy
+         product_reviews POST   /products/:product_id/reviews(.:format)      reviews#create
+     new_product_reviews GET    /products/:product_id/reviews/new(.:format)  reviews#new
+    edit_product_reviews GET    /products/:product_id/reviews/edit(.:format) reviews#edit
+                         GET    /products/:product_id/reviews(.:format)      reviews#show
+                         PUT    /products/:product_id/reviews(.:format)      reviews#update
+                         DELETE /products/:product_id/reviews(.:format)      reviews#destroy
+                products GET    /products(.:format)                          products#index
+                         POST   /products(.:format)                          products#create
+             new_product GET    /products/new(.:format)                      products#new
+            edit_product GET    /products/:id/edit(.:format)                 products#edit
+                 product GET    /products/:id(.:format)                      products#show
+                         PUT    /products/:id(.:format)                      products#update
+                         DELETE /products/:id(.:format)                      products#destroy
+                   roles GET    /roles(.:format)                             roles#index
+                         POST   /roles(.:format)                             roles#create
+                new_role GET    /roles/new(.:format)                         roles#new
+               edit_role GET    /roles/:id/edit(.:format)                    roles#edit
+                    role GET    /roles/:id(.:format)                         roles#show
+                         PUT    /roles/:id(.:format)                         roles#update
+                         DELETE /roles/:id(.:format)                         roles#destroy
+                 reviews GET    /reviews(.:format)                           reviews#index
+                         POST   /reviews(.:format)                           reviews#create
+              new_review GET    /reviews/new(.:format)                       reviews#new
+             edit_review GET    /reviews/:id/edit(.:format)                  reviews#edit
+                  review GET    /reviews/:id(.:format)                       reviews#show
+                         PUT    /reviews/:id(.:format)                       reviews#update
+                         DELETE /reviews/:id(.:format)                       reviews#destroy
+              role_users GET    /role_users(.:format)                        role_users#index
+                         POST   /role_users(.:format)                        role_users#create
+           new_role_user GET    /role_users/new(.:format)                    role_users#new
+          edit_role_user GET    /role_users/:id/edit(.:format)               role_users#edit
+               role_user GET    /role_users/:id(.:format)                    role_users#show
+                         PUT    /role_users/:id(.:format)                    role_users#update
+                         DELETE /role_users/:id(.:format)                    role_users#destroy
+                contacts POST   /contacts(.:format)                          contact_us/contacts#create
+             new_contact GET    /contacts/new(.:format)                      contact_us/contacts#new
+              contact_us        /contact-us(.:format)                        contact_us/contacts#new
+  shipping_returns_index GET    /shipping_returns/index(.:format)            shipping_returns#index
+           payment_index GET    /payment/index(.:format)                     payment#index
+              home_index GET    /home/index(.:format)                        home#index
+             about_index GET    /about/index(.:format)                       about#index
+                         GET    /shipping_returns/index(.:format)            shipping_returns#index
+          usermanagement GET    /usermanagement(.:format)                    usermanagement#index
+               dashboard GET    /dashboard(.:format)                         dashboard#index
+                 payment GET    /payment(.:format)                           payments#index
+                                /products(.:format)                          products#index
+                   about        /about(.:format)                             about#index
+                                /payment(.:format)                           payments#index
+                    home        /home(.:format)                              home#index
+                shipping        /shipping(.:format)                          shipping_returns#index
+        new_user_session GET    /login(.:format)                             devise/sessions#new
+           registrations GET    /register(.:format)                          devise/registrations#new
+            user_session POST   /login(.:format)                             devise/sessions#create
+    destroy_user_session GET    /logout(.:format)                            devise/sessions#destroy
+                         POST   /users/password(.:format)                    devise/passwords#create
+                         GET    /users/password/new(.:format)                devise/passwords#new
+                         GET    /users/password/edit(.:format)               devise/passwords#edit
+                         PUT    /users/password(.:format)                    devise/passwords#update
+                         GET    /users/cancel(.:format)                      devise/registrations#cancel
+                         POST   /users(.:format)                             devise/registrations#create
+                         GET    /users/sign_up(.:format)                     devise/registrations#new
+                         GET    /users/edit(.:format)                        devise/registrations#edit
+                         PUT    /users(.:format)                             devise/registrations#update
+                         DELETE /users(.:format)                             devise/registrations#destroy
+                         POST   /users/confirmation(.:format)                devise/confirmations#create
+                         GET    /users/confirmation/new(.:format)            devise/confirmations#new
+                         GET    /users/confirmation(.:format)                devise/confirmations#show
+                  search POST   /search(.:format)                            home#search
+                    root        /                                            home#index
+                         POST   /contacts(.:format)                          contact_us/contacts#create
+                         GET    /contacts/new(.:format)                      contact_us/contacts#new
+              contact_us        /contact-us(.:format)                        contact_us/contacts#new

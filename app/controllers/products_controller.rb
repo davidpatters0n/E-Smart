@@ -19,7 +19,7 @@ to whaterver is required.
   def index
 
    # @category = Category.all #Get all categories
-    @products = Product.filter(params[:search], [:title])
+    @products = Product.filter(params[:search], [:title]).page(params[:page]).per(5)
 
 =begin
   Filter out the product search based on the title inputted into the params.
