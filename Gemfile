@@ -14,10 +14,11 @@ gem 'cancan'
 gem 'gmaps4rails'
 gem 'meta_request', '0.2.1'
 gem 'contact_us', '~> 0.4.0'
-gem 'jquery-datatables-rails'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 #gem 'acts-as-taggable-on', '~> 2.3.1'
+
+
 #gem 'rails3-jquery-autocomplete'
 
 gem 'mysql2', :group => [:development, :test]

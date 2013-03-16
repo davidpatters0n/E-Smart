@@ -61,7 +61,8 @@
                   </ul>
                   <% @product.reviews.each do |review| %> <!--Product object loops reviews and set review variable-->
                       <hr>
-                      <div><b><%= review.title %></b> <%#= link_to 'Delete Review', product_reviews_path(review.product, review), :confirm => "Do you want to remove comment?" , :method => 'delete' %><br>
+                      <div><b><%= review.title %></b><br>
+                      <%#= link_to 'Delete Review', product_reviews_path(review.product, review), :confirm => "Do you want to remove comment?" , :method => 'delete' % did not finish!!>
                        <!--GET the product review path and pass in the review that belongs to that product along with
                        the review variable. :confirm brings up a javascript alert when the delete button is pressed
                        and the type of method is a 'delete' method-->
