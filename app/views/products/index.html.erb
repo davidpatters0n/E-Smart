@@ -9,6 +9,7 @@
     <th>Avaliable</th>
     <th>Category</th>
     <th>Price</th>
+    <th>Show</th>
     <% if can? :manage, @products %>
         <th>Edit</th>
         <th>Show</th>
@@ -34,6 +35,8 @@
         <td><%= number_to_currency(product.price, :unit => "&pound;") %></td>
         <!--Convert the price into currency format and pass in the product price whilst adding "£" -->
 
+        <td> <%= link_to 'Show', product, :class => 'btn btn-mini' %></td>
+
         <% if can? :manage, @products %>
             <!--Following buttons are used for navigation -->
             <td> <%= link_to "Edit", edit_product_path(product), :class => 'btn btn-mini' %></td>
@@ -46,8 +49,9 @@
 </table>
 <%= paginate @products %>
 
+<% if can? :manage, @products %>
 <!--Link to new product path, product controller will use the CREATE action to handle this -->
 <%= link_to 'New Product', new_product_path, :class => 'btn btn-primary' %>
-
+<% end  %>
 
 
