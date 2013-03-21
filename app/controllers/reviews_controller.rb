@@ -1,10 +1,10 @@
 class ReviewsController < ApplicationController
 
   def create
-    @product = Product.find(params[:product_id])
-    @review = @product.reviews.create(params[:review])
+    @product = Product.find(params[:product_id]) #Find product by product id
+    @review = @product.reviews.create(params[:review]) #create review by giving product and pass in :review inside params
 
-   redirect_to @product
+   redirect_to @product  #redirect to product
   end
 
 

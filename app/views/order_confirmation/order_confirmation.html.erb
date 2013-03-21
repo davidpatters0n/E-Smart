@@ -28,6 +28,10 @@
     <td>Card Type</td>
     <td><%= @order.card_type %></td>  <!--Get the card type -->
   </tr>
+  <tr>
+    <td>Product</td>
+    <td><%= @order.line_items.product.title %></td>
+    </tr>
     <td><b>Total</b></td>
     <td><%= number_to_currency(@order.total_price, :unit => "£") %></td>
   </tr>
