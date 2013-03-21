@@ -1,5 +1,5 @@
 class AboutController < ApplicationController
   def index
-    @cart = current_cart                                   #Get current cart
+    @cart = current_cart #Get current cart
   end
 end

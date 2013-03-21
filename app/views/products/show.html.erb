@@ -54,7 +54,8 @@
                   </div>
                   <ul class="productpagecart">
                     <% if stock_left(@product) == 0 %>
-                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ', :disabled => true %> <!--disable button if no stock-->
+                        <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ', :disabled => true %>
+                        <!--disable button if no stock-->
                     <% else %>
                         <%= button_to 'Add to Cart', line_items_path(:product_id => @product), :class => 'btn btn-primary btn-mini ' %>
                     <% end %>
@@ -62,7 +63,7 @@
                   <% @product.reviews.each do |review| %> <!--Product object loops reviews and set review variable-->
                       <hr>
                       <div><b><%= review.title %></b><br>
-                      <%#= link_to 'Delete Review', product_reviews_path(review.product, review), :confirm => "Do you want to remove comment?" , :method => 'delete' % did not finish!!>
+                      <%#= link_to 'Delete Review', product_reviews_path(review.product, review), :confirm => "Do you want to remove comment?" , :method => 'delete' % DID NOT FINISH!!>
                        <!--GET the product review path and pass in the review that belongs to that product along with
                        the review variable. :confirm brings up a javascript alert when the delete button is pressed
                        and the type of method is a 'delete' method-->

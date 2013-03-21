@@ -14,6 +14,7 @@
 
       <%= f.label :subject %>
       <%= f.select :subject, [["Enquiry", "enquiry",], ["Complaint", "complaint"], ["Feedback", "feedback"]] %>
+      <!--Create a select which has an array of subjects that the user can select from-->
 
       <%= f.label :message %>
       <%= f.text_area :message, :cols => 10, :rows => 10 %>
@@ -61,7 +62,7 @@ https://developers.google.com/maps/documentation/javascript/tutorial
         marker.setMap(map);
         /*Set marker on the map*/
 
-        var infowindow = new google.maps.InfoWindow({   /*Information pane to contain */
+        var infowindow = new google.maps.InfoWindow({   /*Information pane to contain content */
 
             content:"24 Alexanda Road" +
                     " Wimbledon " +
